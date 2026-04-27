@@ -802,7 +802,7 @@ function setTab(t){
 }
 function renderConvList(list){
   if(!list.length){document.getElementById('conv-list').innerHTML='<div class="empty"><p>Nenhuma conversa</p></div>';return;}
-  document.getElementById('conv-list').innerHTML=list.map(c=>`<div class="ci" onclick="openConv('${c.id}',this)"><div class="cav">💬</div><div class="cinfo"><div class="cnm">${fmtPhone(c.lead_id)}</div><div class="cprev">${c.status} · ${timeAgo(c.updated_at||c.created_at)}</div></div></div>`).join('');
+  document.getElementById('conv-list').innerHTML=list.map(c=>`<div class="ci" onclick="openConv('${c.id}',this)"><div class="cav">💬</div><div class="cinfo"><div class="cnm">${c.leads?.name||fmtPhone(c.leads?.phone||c.lead_id)}</div><div class="cprev">${c.status} · ${timeAgo(c.updated_at||c.created_at)}</div></div></div>`).join('');
 }
 function filterConvs(q){let list=allConvs;if(q)list=list.filter(c=>JSON.stringify(c).toLowerCase().includes(q.toLowerCase()));renderConvList(list);}
 async function openConv(id,el){
