@@ -811,7 +811,7 @@ async function openConv(id,el){
   const conv=allConvs.find(c=>c.id===id);
   const area=document.getElementById('chat-area');
   if(!msgs?.length){area.innerHTML='<div class="chat-empty"><p>Nenhuma mensagem</p></div>';return;}
-  area.innerHTML=`<div class="chat-tb"><div><div style="font-size:14px;font-weight:700">${fmtPhone(conv?.lead_id)}</div><div style="font-size:11px;color:var(--t3);margin-top:2px">${conv?.status||'aberta'}</div></div><div style="display:flex;gap:6px"><button class="btn btn-g btn-xs" onclick="showToast('IA pausada')">Pausar IA</button></div></div><div class="chat-msgs" id="ms">${msgs.map(m=>`<div class="mg ${m.role}"><div class="bub ${m.role}">${m.content||''}</div><div class="bt">${new Date(m.created_at).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}</div></div>`).join('')}</div>`;
+  area.innerHTML=`<div class="chat-tb"><div><div style="font-size:14px;font-weight:700">${conv?.leads?.name||fmtPhone(conv?.leads?.phone||conv?.lead_id)}</div><div style="font-size:11px;color:var(--t3);margin-top:2px">${conv?.status||'aberta'}</div></div><div style="display:flex;gap:6px"><button class="btn btn-g btn-xs" onclick="showToast('IA pausada')">Pausar IA</button></div></div><div class="chat-msgs" id="ms">${msgs.map(m=>`<div class="mg ${m.role}"><div class="bub ${m.role}">${m.content||''}</div><div class="bt">${new Date(m.created_at).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}</div></div>`).join('')}</div>`;
   document.getElementById('ms').scrollTop=99999;
 }
 
