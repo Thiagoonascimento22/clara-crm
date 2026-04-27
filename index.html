@@ -789,7 +789,7 @@ async function loadHome(){
 
 let convTab='all';
 async function loadInbox(){
-  const convs=await supa('conversas?select=id,lead_id,status,created_at,updated_at&order=updated_at.desc&limit=40');
+  const convs=await supa('conversas?select=id,lead_id,status,created_at,updated_at,leads(phone,name)&order=updated_at.desc&limit=40');
   allConvs=convs||[];renderConvList(allConvs);
   document.getElementById('inbox-badge').textContent=allConvs.length;
 }
