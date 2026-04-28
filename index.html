@@ -867,7 +867,7 @@ tr:hover td{background:var(--s2);}
         <div class="drop-zone" id="csv-drop" onclick="document.getElementById('csv-file').click()">
           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
           <h4>Arraste o CSV aqui ou clique para selecionar</h4>
-          <p>Formato: <strong>nome, telefone, var2, var3...</strong> (1 lead por linha)<br>Aceita .csv e .txt</p>
+          <p>Formatos aceitos:<br>• Só telefones (1 coluna): <strong>5544998500211</strong><br>• Nome + telefone: <strong>Thiago, 5544998500211</strong><br>• Sem 55? Adicionamos automaticamente</p>
         </div>
         <input type="file" id="csv-file" accept=".csv,.txt" style="display:none" onchange="handleCSV(this.files[0])">
       </div>
@@ -1735,23 +1735,53 @@ function parseCSV(text){
   for(let i=0;i<lines.length;i++){
     const line=lines[i].trim();
     if(!line)continue;
-    // Pular cabeçalho se primeira linha tiver palavras tipo "nome", "telefone"
-    if(i===0&&/nome|telefone|phone|name/i.test(line)&&!/\d{10,}/.test(line))continue;
+
+    // Pular cabeçalho: primeira linha sem nenhum dígito longo (telefone) é cabeçalho
+    if(i===0&&!/\d{8,}/.test(line))continue;
+
+    // Aceita separadores: vírgula, ponto-vírgula, tab
     const parts=line.split(/[,;\t]/).map(p=>p.trim().replace(/^["']|["']$/g,''));
+
     let nome='',telefone='',vars=[];
-    // Heurística: se primeiro campo tem muitos números, é telefone
-    if(/\d{8,}/.test(parts[0])&&parts.length>=2){
-      telefone=parts[0];nome=parts[1]||'';vars=parts.slice(2);
-    }else{
-      nome=parts[0]||'';telefone=parts[1]||'';vars=parts.slice(2);
+
+    if(parts.length===1){
+      // Só uma coluna = só telefone
+      telefone=parts[0];
+    }else if(parts.length>=2){
+      // Detectar qual é telefone (o que tem mais dígitos)
+      const p0digits=(parts[0].replace(/\D/g,'')).length;
+      const p1digits=(parts[1].replace(/\D/g,'')).length;
+      if(p0digits>=10&&p1digits<10){
+        // primeiro é telefone, segundo é nome
+        telefone=parts[0];nome=parts[1]||'';vars=parts.slice(2);
+      }else if(p1digits>=10){
+        // segundo é telefone, primeiro é nome
+        nome=parts[0]||'';telefone=parts[1];vars=parts.slice(2);
+      }else{
+        // Sem padrão claro — assume primeiro é nome
+        nome=parts[0]||'';telefone=parts[1]||'';vars=parts.slice(2);
+      }
     }
+
+    // Limpar telefone: só dígitos
     telefone=telefone.replace(/\D/g,'');
     if(telefone.length<10)continue;
+
+    // Adicionar 55 se for telefone BR sem código do país
     if(telefone.length===10||telefone.length===11)telefone='55'+telefone;
+
+    // Se não tiver nome, usa "Lead {n}"
+    if(!nome)nome=`Lead ${leads.length+1}`;
+
     leads.push({nome,phone:telefone,vars});
   }
   campData.leads=leads;
   updateCSVPreview();
+  if(leads.length){
+    showToast(`✓ ${leads.length} leads importados`);
+  }else{
+    showToast('❌ Nenhum lead válido encontrado no arquivo');
+  }
 }
 
 function updateCSVPreview(){
