@@ -328,6 +328,65 @@ tr:hover td{background:var(--s2);}
 ::-webkit-scrollbar-thumb{background:var(--b3);border-radius:3px;}
 ::-webkit-scrollbar-thumb:hover{background:var(--t4);}
 
+/* ════════════════════════════════════════════
+   TELA INÍCIO PREMIUM (chique, diferenciada)
+   ════════════════════════════════════════════ */
+.hero{position:relative;background:linear-gradient(135deg,#0a0a0b 0%,#1a0e08 60%,#2d1810 100%);border:1px solid var(--b1);border-radius:28px;padding:48px 44px;margin-bottom:24px;overflow:hidden;}
+[data-theme="light"] .hero{background:linear-gradient(135deg,#fafafa 0%,#fff5ed 60%,#ffe4d3 100%);}
+.hero::before{content:'';position:absolute;top:-50%;right:-20%;width:600px;height:600px;background:radial-gradient(circle,rgba(255,107,26,.12) 0%,transparent 60%);pointer-events:none;animation:pulse 8s ease-in-out infinite;}
+.hero::after{content:'';position:absolute;bottom:-40%;left:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(255,140,66,.08) 0%,transparent 70%);pointer-events:none;}
+@keyframes pulse{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.1)}}
+.hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:40px 40px;mask-image:radial-gradient(ellipse at center,black 0%,transparent 70%);}
+[data-theme="light"] .hero-grid-bg{background-image:linear-gradient(rgba(0,0,0,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.04) 1px,transparent 1px);}
+.hero-content{position:relative;z-index:1;}
+.hero-pill{display:inline-flex;align-items:center;gap:7px;background:rgba(255,107,26,.12);border:1px solid rgba(255,107,26,.3);border-radius:99px;padding:6px 14px;font-size:11px;font-weight:600;color:var(--br);letter-spacing:-.01em;margin-bottom:18px;}
+.hero-pill .live-dot{width:6px;height:6px;border-radius:50%;background:var(--gr);box-shadow:0 0 8px var(--gr);animation:livePulse 2s ease-in-out infinite;}
+@keyframes livePulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero-greeting{font-size:14px;color:var(--t3);font-weight:500;margin-bottom:8px;letter-spacing:-.01em;}
+.hero-title{font-size:44px;font-weight:900;letter-spacing:-.04em;line-height:1.05;margin-bottom:14px;background:linear-gradient(135deg,#fff 0%,#a1a1aa 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+[data-theme="light"] .hero-title{background:linear-gradient(135deg,#09090b 0%,#52525b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-sub{font-size:16px;color:var(--t2);font-weight:500;letter-spacing:-.01em;line-height:1.55;max-width:520px;margin-bottom:32px;}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;}
+.hero-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:11px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;border:none;font-family:'Inter',sans-serif;letter-spacing:-.01em;}
+.hero-btn svg{width:15px;height:15px;stroke-width:2;}
+.hero-btn-p{background:linear-gradient(135deg,var(--br),#ff8c42);color:#fff;box-shadow:0 4px 16px rgba(255,107,26,.35);}
+.hero-btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,107,26,.5);}
+.hero-btn-g{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:var(--t1);backdrop-filter:blur(10px);}
+[data-theme="light"] .hero-btn-g{background:rgba(0,0,0,.03);border-color:rgba(0,0,0,.08);}
+.hero-btn-g:hover{background:rgba(255,255,255,.08);transform:translateY(-2px);}
+[data-theme="light"] .hero-btn-g:hover{background:rgba(0,0,0,.06);}
+
+/* Mini stats elegantes na hero */
+.hero-mini{position:absolute;top:48px;right:44px;display:flex;gap:14px;z-index:1;}
+.hero-mini-item{text-align:right;}
+.hero-mini-n{font-size:24px;font-weight:800;color:var(--t1);letter-spacing:-.02em;font-feature-settings:"tnum";line-height:1;}
+.hero-mini-l{font-size:11px;color:var(--t3);font-weight:500;text-transform:uppercase;letter-spacing:.08em;margin-top:4px;}
+.hero-mini-divider{width:1px;background:rgba(255,255,255,.1);}
+[data-theme="light"] .hero-mini-divider{background:rgba(0,0,0,.08);}
+
+/* Cards info premium na home */
+.home-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.home-card{background:var(--w);border:1px solid var(--b1);border-radius:18px;padding:22px;transition:all .25s;cursor:pointer;position:relative;overflow:hidden;}
+.home-card:hover{border-color:rgba(255,107,26,.3);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.3);}
+[data-theme="light"] .home-card:hover{box-shadow:0 12px 32px rgba(0,0,0,.08);}
+.home-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--br),transparent);opacity:0;transition:opacity .25s;}
+.home-card:hover::before{opacity:1;}
+.home-card-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.home-card-icon{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;}
+.home-card-icon svg{width:18px;height:18px;stroke-width:2;}
+.home-card-arr{color:var(--t3);transition:all .2s;}
+.home-card:hover .home-card-arr{color:var(--br);transform:translateX(4px);}
+.home-card-arr svg{width:16px;height:16px;}
+.home-card-t{font-size:15px;font-weight:700;color:var(--t1);letter-spacing:-.02em;margin-bottom:6px;}
+.home-card-d{font-size:13px;color:var(--t3);font-weight:500;line-height:1.55;}
+
+@media (max-width:900px){
+  .hero{padding:32px 24px;}
+  .hero-title{font-size:32px;}
+  .hero-mini{display:none;}
+  .home-cards{grid-template-columns:1fr;}
+}
+
 .tpl-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
 .tpl{background:var(--w);border:1px solid var(--b1);border-radius:var(--rxl);padding:18px;transition:all .2s;display:flex;flex-direction:column;gap:12px;}
 .tpl:hover{border-color:var(--b2);transform:translateY(-2px);}
@@ -492,18 +551,73 @@ tr:hover td{background:var(--s2);}
     </div>
     <div class="content">
 
-      <!-- INÍCIO -->
+      <!-- INÍCIO PREMIUM -->
       <div class="page active" id="page-home">
-        <div class="welcome">
-          <div class="w-greeting" id="greeting">Boa noite,</div>
-          <div class="w-title" id="welcome-name">Thiago</div>
-          <div class="w-sub">Aqui está um resumo da sua operação.</div>
+        <div class="hero">
+          <div class="hero-grid-bg"></div>
+          <div class="hero-mini">
+            <div class="hero-mini-item">
+              <div class="hero-mini-n" id="hm-conv">—</div>
+              <div class="hero-mini-l">Conversas</div>
+            </div>
+            <div class="hero-mini-divider"></div>
+            <div class="hero-mini-item">
+              <div class="hero-mini-n" id="hm-leads">—</div>
+              <div class="hero-mini-l">Leads</div>
+            </div>
+          </div>
+          <div class="hero-content">
+            <div class="hero-pill">
+              <span class="live-dot"></span>
+              SISTEMA AO VIVO
+            </div>
+            <div class="hero-greeting" id="greeting">Boa noite,</div>
+            <div class="hero-title" id="welcome-name">Thiago.</div>
+            <div class="hero-sub">Sua central de inteligência de vendas. Cada conversa, cada lead, cada conversão — em um só lugar.</div>
+            <div class="hero-actions">
+              <button class="hero-btn hero-btn-p" onclick="go('campanhas',document.querySelector('[onclick*=campanhas]'))">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                Nova Campanha
+              </button>
+              <button class="hero-btn hero-btn-g" onclick="go('inbox',document.querySelector('[onclick*=inbox]'))">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                Caixa de Entrada
+              </button>
+              <button class="hero-btn hero-btn-g" onclick="go('dashboard',document.querySelector('[onclick*=dashboard]'))">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                Dashboard
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="stats-row">
-          <div class="sc"><div class="sc-icon" style="background:var(--bll)"><svg fill="none" stroke="var(--bl)" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div class="sc-n" id="d1">—</div><div class="sc-l">Total de Leads</div></div>
-          <div class="sc"><div class="sc-icon" style="background:var(--brl)"><svg fill="none" stroke="var(--br)" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="sc-n" id="d2">—</div><div class="sc-l">Conversas Abertas</div></div>
-          <div class="sc"><div class="sc-icon" style="background:var(--grl)"><svg fill="none" stroke="var(--gr)" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="sc-n" id="d3">—</div><div class="sc-l">Matriculados</div></div>
-          <div class="sc"><div class="sc-icon" style="background:var(--pul)"><svg fill="none" stroke="var(--pu)" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="sc-n" id="d4">—%</div><div class="sc-l">Conversão</div></div>
+
+        <div class="home-cards">
+          <div class="home-card" onclick="go('campanhas',document.querySelector('[onclick*=campanhas]'))">
+            <div class="home-card-h">
+              <div class="home-card-icon" style="background:var(--brl);"><svg fill="none" stroke="var(--br)" viewBox="0 0 24 24"><path d="M3 3h18v18H3z"/><path d="M3 9h18M9 21V9"/></svg></div>
+              <span class="home-card-arr"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span>
+            </div>
+            <div class="home-card-t">Campanhas</div>
+            <div class="home-card-d">Crie disparos em massa com IA conduzindo a conversa até o fechamento.</div>
+          </div>
+
+          <div class="home-card" onclick="go('agentes',document.querySelector('[onclick*=agentes]'))">
+            <div class="home-card-h">
+              <div class="home-card-icon" style="background:var(--pul);"><svg fill="none" stroke="var(--pu)" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/></svg></div>
+              <span class="home-card-arr"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span>
+            </div>
+            <div class="home-card-t">Agentes IA</div>
+            <div class="home-card-d">Treine sua Clara com base de conhecimento, scripts e objeções específicas.</div>
+          </div>
+
+          <div class="home-card" onclick="go('dashboard',document.querySelector('[onclick*=dashboard]'))">
+            <div class="home-card-h">
+              <div class="home-card-icon" style="background:var(--grl);"><svg fill="none" stroke="var(--gr)" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+              <span class="home-card-arr"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span>
+            </div>
+            <div class="home-card-t">ROI em tempo real</div>
+            <div class="home-card-d">Acompanhe investimento, faturamento e conversão por período personalizado.</div>
+          </div>
         </div>
       </div>
 
@@ -1115,14 +1229,13 @@ async function loadHome(){
   ]);
   allLeads=leads||[];
   if(leads){
-    document.getElementById('d1').textContent=leads.length;
-    const mat=leads.filter(l=>l.stage==='matriculado').length;
-    document.getElementById('d3').textContent=mat;
-    document.getElementById('d4').textContent=leads.length?Math.round((mat/leads.length)*100)+'%':'0%';
+    const el1=document.getElementById('hm-leads');
+    if(el1)el1.textContent=leads.length;
   }
   if(convs){
     const ab=convs.filter(c=>c.status==='aberta').length;
-    document.getElementById('d2').textContent=ab;
+    const el2=document.getElementById('hm-conv');
+    if(el2)el2.textContent=ab;
     document.getElementById('inbox-badge').textContent=convs.length;
   }
 }
