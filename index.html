@@ -963,6 +963,9 @@ let agents=[];
 let editingId=null;
 let currentPeriod='hoje';
 let customStart=null,customEnd=null;
+let inboxPollInterval=null;
+let lastInboxCount=0;
+let openConvId=null;
 
 function getUsers(){return JSON.parse(localStorage.getItem('clara-users')||'[]');}
 function saveUsers(u){localStorage.setItem('clara-users',JSON.stringify(u));}
@@ -1044,7 +1047,7 @@ function go(page,el){
   document.getElementById('page-title').textContent=T[page]||page;
   if(page==='home')loadHome();
   if(page==='dashboard')loadDashboard();
-  if(page==='inbox')loadInbox();
+  if(page==='inbox'){loadInbox();startInboxPolling();}else{stopInboxPolling();}
   if(page==='agentes')renderAgents();
   if(page==='campanhas')loadCampanhas();
   if(page==='templates')loadTemplates();
@@ -1209,10 +1212,65 @@ async function salvarVenda(){
   }else showToast('Erro ao salvar');
 }
 
-async function loadInbox(){
+async function loadInbox(silent=false){
   const convs=await supa('conversas?select=id,lead_id,status,created_at,updated_at,leads(phone,name)&order=updated_at.desc&limit=40');
-  allConvs=convs||[];renderConvList(allConvs);
-  document.getElementById('inbox-badge').textContent=allConvs.length;
+  if(!convs)return;
+  const oldConvs=allConvs||[];
+  allConvs=convs;
+  const newCount=convs.length;
+  document.getElementById('inbox-badge').textContent=newCount;
+
+  // Detectar nova conversa OU nova mensagem (updated_at mudou)
+  if(silent && oldConvs.length){
+    const oldMap=Object.fromEntries(oldConvs.map(c=>[c.id,c.updated_at]));
+    const novidades=convs.filter(c=>!oldMap[c.id]||oldMap[c.id]!==c.updated_at);
+    if(novidades.length){
+      // Notificação sonora curta
+      try{
+        const audio=new Audio('data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQ==');
+        audio.volume=0.3;audio.play().catch(()=>{});
+      }catch{}
+      const novaConv=!oldMap[novidades[0].id];
+      const phone=novidades[0].leads?.phone||novidades[0].lead_id;
+      const name=novidades[0].leads?.name||fmtPhone(phone);
+      showToast(`🔔 ${novaConv?'Nova conversa':'Nova mensagem'}: ${name}`);
+    }
+  }
+
+  // Re-renderizar
+  let list=allConvs;
+  if(convTab==='open')list=allConvs.filter(c=>c.status==='aberta');
+  renderConvList(list);
+
+  // Se tem conversa aberta, atualizar mensagens dela também
+  if(silent && openConvId){
+    const conv=allConvs.find(c=>c.id===openConvId);
+    if(conv){
+      const elActive=document.querySelector(`.ci.active`);
+      if(elActive)refreshOpenConv();
+    }
+  }
+}
+
+async function refreshOpenConv(){
+  if(!openConvId)return;
+  const msgs=await supa(`mensagens?select=*&conversa_id=eq.${openConvId}&order=created_at.asc`);
+  const ms=document.getElementById('ms');
+  if(!ms||!msgs)return;
+  const currentCount=ms.querySelectorAll('.mg').length;
+  if(msgs.length>currentCount){
+    // Tem mensagem nova — re-renderiza
+    ms.innerHTML=msgs.map(m=>`<div class="mg ${m.role}"><div class="bub ${m.role}">${(m.content||'').replace(/</g,'&lt;')}</div><div class="bt">${new Date(m.created_at).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}</div></div>`).join('');
+    ms.scrollTop=99999;
+  }
+}
+
+function startInboxPolling(){
+  stopInboxPolling();
+  inboxPollInterval=setInterval(()=>loadInbox(true),8000);
+}
+function stopInboxPolling(){
+  if(inboxPollInterval){clearInterval(inboxPollInterval);inboxPollInterval=null;}
 }
 function setTab(t){
   convTab=t;
@@ -1232,6 +1290,7 @@ function renderConvList(list){
 }
 function filterConvs(q){let list=allConvs;if(q)list=list.filter(c=>JSON.stringify(c).toLowerCase().includes(q.toLowerCase()));renderConvList(list);}
 async function openConv(id,el){
+  openConvId=id;
   document.querySelectorAll('.ci').forEach(i=>i.classList.remove('active'));el.classList.add('active');
   const msgs=await supa(`mensagens?select=*&conversa_id=eq.${id}&order=created_at.asc`);
   const conv=allConvs.find(c=>c.id===id);
