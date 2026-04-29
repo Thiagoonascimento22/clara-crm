@@ -445,6 +445,26 @@ tr:hover td{background:var(--s2)}
 .ci-action:hover{color:var(--t1);border-color:var(--b2);background:var(--s2)}
 .ci-action svg{width:13px;height:13px;stroke-width:2}
 .archived-badge{display:inline-flex;align-items:center;gap:3px;font-size:9px;color:var(--t3);font-weight:700;background:var(--s2);border:1px solid var(--b1);padding:2px 6px;border-radius:5px;text-transform:uppercase;letter-spacing:.04em}
+.charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+.chart-card{background:linear-gradient(180deg,var(--w) 0%,color-mix(in srgb,var(--w) 78%,var(--br) 22%) 100%);border:1px solid var(--b1);border-radius:var(--rxl);padding:20px;position:relative;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.2),0 4px 12px rgba(0,0,0,.15)}
+[data-theme="light"] .chart-card{background:linear-gradient(180deg,var(--w) 0%,color-mix(in srgb,var(--w) 96%,var(--br) 4%) 100%);box-shadow:0 1px 3px rgba(0,0,0,.05),0 4px 12px rgba(0,0,0,.03)}
+.chart-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--br),transparent);opacity:.4}
+.chart-card.gastos::before{background:linear-gradient(90deg,transparent,var(--rd),transparent)}
+.chart-card.vendas::before{background:linear-gradient(90deg,transparent,var(--gr),transparent)}
+.chart-hd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px}
+.chart-title{font-size:13px;font-weight:600;color:var(--t2);letter-spacing:-.005em;text-transform:uppercase;font-family:'Geist Mono',monospace}
+.chart-total{font-size:24px;font-weight:800;letter-spacing:-.02em;margin-top:6px;font-family:'Geist',sans-serif;line-height:1}
+.chart-total.gastos{color:var(--rd)}
+.chart-total.vendas{color:var(--gr)}
+.chart-sub{font-size:11px;color:var(--t3);margin-top:4px;font-weight:500}
+.chart-svg-wrap{position:relative;width:100%;height:180px;margin-top:8px}
+.chart-svg{width:100%;height:100%;overflow:visible}
+.chart-grid-line{stroke:var(--b1);stroke-width:1;stroke-dasharray:3,3;opacity:.5}
+.chart-axis-label{font-size:9.5px;fill:var(--t4);font-weight:600;font-family:'Geist Mono',monospace}
+.chart-tooltip{position:absolute;background:var(--t1);color:var(--bg);padding:7px 11px;border-radius:7px;font-size:11px;font-weight:600;pointer-events:none;display:none;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,.3);z-index:10;transform:translate(-50%,-110%)}
+.chart-tooltip.show{display:block}
+.chart-dot{cursor:pointer;transition:r .15s}
+.chart-empty{display:flex;align-items:center;justify-content:center;height:180px;color:var(--t3);font-size:12px;font-style:italic}
 .itabs{display:flex;gap:2px;padding:8px 10px 0;border-bottom:1px solid var(--b1);background:var(--w);overflow-x:auto;scrollbar-width:none}
 .itabs::-webkit-scrollbar{display:none}
 .itab{padding:8px 12px;font-size:12px;font-weight:600;color:var(--t3);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;letter-spacing:-.005em;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;background:transparent;border-top:none;border-left:none;border-right:none;font-family:inherit;line-height:1.4;margin-bottom:-1px}
@@ -515,7 +535,7 @@ tr:hover td{background:var(--s2)}
 <div class="content">
 <div class="page active" id="page-home"><div class="hero"><div class="hero-grid-bg"></div><div class="hero-mini"><div class="hero-mini-item"><div class="hero-mini-n" id="hm-conv">—</div><div class="hero-mini-l">Conversas</div></div><div class="hero-mini-divider"></div><div class="hero-mini-item"><div class="hero-mini-n" id="hm-leads">—</div><div class="hero-mini-l">Leads</div></div></div><div class="hero-content"><div class="hero-pill"><span class="live-dot"></span>SISTEMA AO VIVO</div><div class="hero-greeting" id="greeting">Boa noite,</div><div class="hero-title" id="welcome-name">Thiago.</div><div class="hero-sub">Sua central de inteligência de vendas. Cada conversa, cada lead, cada conversão — em um só lugar.</div><div class="hero-actions"><button class="hero-btn hero-btn-p" onclick="go('campanhas',document.querySelector('[onclick*=campanhas]'))"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Nova Campanha</button><button class="hero-btn hero-btn-g" onclick="go('inbox',document.querySelector('[onclick*=inbox]'))"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Caixa de Entrada</button><button class="hero-btn hero-btn-g" onclick="go('dashboard',document.querySelector('[onclick*=dashboard]'))"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Dashboard</button></div></div></div>
 <div class="home-cards"><div class="home-card" onclick="go('campanhas',document.querySelector('[onclick*=campanhas]'))"><div class="home-card-h"><div class="home-card-icon" style="background:var(--brl)"><svg fill="none" stroke="var(--br)" viewBox="0 0 24 24"><path d="M3 3h18v18H3z"/><path d="M3 9h18M9 21V9"/></svg></div><span class="home-card-arr"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div><div class="home-card-t">Campanhas</div><div class="home-card-d">Crie disparos em massa com IA conduzindo a conversa até o fechamento.</div></div><div class="home-card" onclick="go('agentes',document.querySelector('[onclick*=agentes]'))"><div class="home-card-h"><div class="home-card-icon" style="background:var(--pul)"><svg fill="none" stroke="var(--pu)" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/></svg></div><span class="home-card-arr"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div><div class="home-card-t">Agentes IA</div><div class="home-card-d">Treine sua Clara com base de conhecimento, scripts e objeções específicas.</div></div><div class="home-card" onclick="go('dashboard',document.querySelector('[onclick*=dashboard]'))"><div class="home-card-h"><div class="home-card-icon" style="background:var(--grl)"><svg fill="none" stroke="var(--gr)" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div><span class="home-card-arr"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div><div class="home-card-t">ROI em tempo real</div><div class="home-card-d">Acompanhe investimento, faturamento e conversão por período personalizado.</div></div></div></div>
-<div class="page" id="page-dashboard"><div class="dash-hd"><div><div class="dash-title">Dashboard Financeiro</div><div class="dash-sub" id="dash-period-label">Hoje</div></div><div class="dash-actions"><button class="btn btn-g" onclick="openModal('m-gasto')">+ Adicionar Gasto</button><button class="btn btn-p" onclick="openModal('m-venda')">+ Registrar Venda</button></div></div><div class="period-bar"><button class="period-btn active" onclick="setPeriod('hoje',this)">Hoje</button><button class="period-btn" onclick="setPeriod('semana',this)">Esta semana</button><button class="period-btn" onclick="setPeriod('mes',this)">Este mês</button><button class="period-btn" onclick="setPeriod('30dias',this)">Últimos 30 dias</button><div class="period-divider"></div><div class="period-custom"><input type="date" id="period-start" onchange="setPeriodCustom()"><span style="color:var(--t4);font-size:11px">até</span><input type="date" id="period-end" onchange="setPeriodCustom()"></div></div><div class="kpi-grid"><div class="kpi kpi-clickable" onclick="toggleInvestDetail()"><div class="kpi-h"><div class="kpi-icon" style="background:var(--rdl)"><svg fill="none" stroke="var(--rd)" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/></svg></div><span class="kpi-arrow"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div><div class="kpi-l">Investimento</div><div class="kpi-n" id="k-invest">R$ 0,00</div><div class="kpi-sub" id="k-invest-sub">Clique para ver detalhes</div></div><div class="kpi"><div class="kpi-h"><div class="kpi-icon" style="background:var(--bll)"><svg fill="none" stroke="var(--bl)" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div></div><div class="kpi-l">Faturamento Bruto</div><div class="kpi-n" id="k-bruto">R$ 0,00</div><div class="kpi-sub"><span id="k-bruto-vendas">0</span> vendas</div></div><div class="kpi"><div class="kpi-h"><div class="kpi-icon" style="background:var(--grl)"><svg fill="none" stroke="var(--gr)" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/></svg></div></div><div class="kpi-l">Faturamento Líquido</div><div class="kpi-n" id="k-liquido">R$ 0,00</div><div class="kpi-sub">Bruto − Investimento</div></div><div class="kpi"><div class="kpi-h"><div class="kpi-icon" style="background:var(--brl)"><svg fill="none" stroke="var(--br)" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg></div></div><div class="kpi-l">ROI</div><div class="kpi-n" id="k-roi">—</div><div class="kpi-sub" id="k-roi-sub">Retorno sobre investimento</div></div></div><div class="invest-detail" id="invest-detail"><div class="invest-hd"><div class="invest-t">Detalhamento dos Investimentos</div><button class="btn btn-g btn-sm" onclick="toggleInvestDetail()">Fechar</button></div><div class="invest-list" id="invest-list"></div><div class="invest-actions"><button class="btn btn-p btn-sm" onclick="openModal('m-gasto')">+ Adicionar Gasto</button></div></div></div>
+<div class="page" id="page-dashboard"><div class="dash-hd"><div><div class="dash-title">Dashboard Financeiro</div><div class="dash-sub" id="dash-period-label">Hoje</div></div><div class="dash-actions"><button class="btn btn-g" onclick="openModal('m-gasto')">+ Adicionar Gasto</button><button class="btn btn-p" onclick="openModal('m-venda')">+ Registrar Venda</button></div></div><div class="period-bar"><button class="period-btn active" onclick="setPeriod('hoje',this)">Hoje</button><button class="period-btn" onclick="setPeriod('semana',this)">Esta semana</button><button class="period-btn" onclick="setPeriod('mes',this)">Este mês</button><button class="period-btn" onclick="setPeriod('30dias',this)">Últimos 30 dias</button><div class="period-divider"></div><div class="period-custom"><input type="date" id="period-start" onchange="setPeriodCustom()"><span style="color:var(--t4);font-size:11px">até</span><input type="date" id="period-end" onchange="setPeriodCustom()"></div></div><div class="kpi-grid"><div class="kpi kpi-clickable" onclick="toggleInvestDetail()"><div class="kpi-h"><div class="kpi-icon" style="background:var(--rdl)"><svg fill="none" stroke="var(--rd)" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/></svg></div><span class="kpi-arrow"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div><div class="kpi-l">Investimento</div><div class="kpi-n" id="k-invest">R$ 0,00</div><div class="kpi-sub" id="k-invest-sub">Clique para ver detalhes</div></div><div class="kpi"><div class="kpi-h"><div class="kpi-icon" style="background:var(--bll)"><svg fill="none" stroke="var(--bl)" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div></div><div class="kpi-l">Faturamento Bruto</div><div class="kpi-n" id="k-bruto">R$ 0,00</div><div class="kpi-sub"><span id="k-bruto-vendas">0</span> vendas</div></div><div class="kpi"><div class="kpi-h"><div class="kpi-icon" style="background:var(--grl)"><svg fill="none" stroke="var(--gr)" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/></svg></div></div><div class="kpi-l">Faturamento Líquido</div><div class="kpi-n" id="k-liquido">R$ 0,00</div><div class="kpi-sub">Bruto − Investimento</div></div><div class="kpi"><div class="kpi-h"><div class="kpi-icon" style="background:var(--brl)"><svg fill="none" stroke="var(--br)" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg></div></div><div class="kpi-l">ROI</div><div class="kpi-n" id="k-roi">—</div><div class="kpi-sub" id="k-roi-sub">Retorno sobre investimento</div></div></div><div class="invest-detail" id="invest-detail"><div class="invest-hd"><div class="invest-t">Detalhamento dos Investimentos</div><button class="btn btn-g btn-sm" onclick="toggleInvestDetail()">Fechar</button></div><div class="invest-list" id="invest-list"></div><div class="invest-actions"><button class="btn btn-p btn-sm" onclick="openModal('m-gasto')">+ Adicionar Gasto</button></div></div><div class="charts-grid"><div class="chart-card gastos"><div class="chart-hd"><div><div class="chart-title">Gastos</div><div class="chart-total gastos" id="chart-gastos-total">R$ 0,00</div><div class="chart-sub" id="chart-gastos-sub">no período</div></div></div><div class="chart-svg-wrap" id="chart-gastos-wrap"><div class="chart-tooltip" id="tip-gastos"></div></div></div><div class="chart-card vendas"><div class="chart-hd"><div><div class="chart-title">Vendas</div><div class="chart-total vendas" id="chart-vendas-total">R$ 0,00</div><div class="chart-sub" id="chart-vendas-sub">no período</div></div></div><div class="chart-svg-wrap" id="chart-vendas-wrap"><div class="chart-tooltip" id="tip-vendas"></div></div></div></div></div>
 <div class="page" id="page-inbox"><div class="inbox-wrap"><div class="inbox-left"><div class="ilh"><span class="ilt">Conversas</span><button class="btn btn-g btn-xs" onclick="loadInbox()">↻</button></div><div class="itabs"><button class="itab active" id="it-all" onclick="setMainTab('all')">Todos<span class="count" id="ct-all">0</span></button><button class="itab" id="it-open" onclick="setMainTab('open')">Aguardando<span class="count" id="ct-open">0</span></button><button class="itab" id="it-arq" onclick="setMainTab('arq')">Arquivadas<span class="count" id="ct-arq">0</span></button></div><div class="inbox-filter-bar"><div class="dropdown"><button class="inbox-filter-btn" id="fb-camp" onclick="toggleDropdown('dd-camp',event)" title="Filtrar por campanha"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 7h18M3 12h18M3 17h18"/></svg><span id="fb-camp-label">Campanha</span><svg class="caret" fill="none" viewBox="0 0 24 24" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg></button><div class="dropdown-menu" id="dd-camp"></div></div><div class="dropdown"><button class="inbox-filter-btn" id="fb-status" onclick="toggleDropdown('dd-status',event)" title="Filtrar por status"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg><span id="fb-status-label">Status</span><svg class="caret" fill="none" viewBox="0 0 24 24" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg></button><div class="dropdown-menu" id="dd-status"><div class="dropdown-item" onclick="setFilter('status','')">Todos</div><div class="dropdown-item" onclick="setFilter('status','aberta')">Aberta</div><div class="dropdown-item" onclick="setFilter('status','pausada')">Pausada</div><div class="dropdown-item" onclick="setFilter('status','fechada')">Fechada</div></div></div><div class="dropdown"><button class="inbox-filter-btn" id="fb-data" onclick="toggleDropdown('dd-data',event)" title="Filtrar por data"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span id="fb-data-label">Data</span><svg class="caret" fill="none" viewBox="0 0 24 24" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg></button><div class="dropdown-menu" id="dd-data"><div class="dropdown-item" onclick="setFilter('data','')">Todas</div><div class="dropdown-item" onclick="setFilter('data','today')">Hoje</div><div class="dropdown-item" onclick="setFilter('data','yesterday')">Ontem</div><div class="dropdown-item" onclick="setFilter('data','7d')">Últimos 7 dias</div><div class="dropdown-item" onclick="setFilter('data','30d')">Últimos 30 dias</div></div></div><button class="inbox-clear-btn" id="clear-filters" onclick="clearFilters()" style="display:none">✕ Limpar</button></div><div class="isearch"><input class="si" placeholder="Buscar conversa..." oninput="filterConvs(this.value)"></div><div class="ilist" id="conv-list"><div class="empty"><p>Carregando...</p></div></div></div><div class="chat-area" id="chat-area"><div class="chat-empty"><p>Selecione uma conversa</p></div></div></div></div>
 <div class="page" id="page-agentes"><div class="page-hd"><div><div class="page-title">Agentes de I.A</div><div class="page-sub">Crie e treine seus agentes de vendas</div></div><button class="btn btn-p" onclick="openNewAgent()">+ Criar Agente</button></div><div id="agents-container"></div></div>
 <div class="page" id="page-disparo"><div class="page-hd"><div><div class="page-title">Disparador</div><div class="page-sub">Use a tela Campanhas para criar e disparar mensagens</div></div></div><div class="empty-state"><h3>O Disparador agora vive em "Campanhas"</h3><p>Cada campanha tem seu próprio template, agente de IA e lista de leads.</p><button class="btn btn-p" style="margin-top:14px" onclick="go('campanhas',document.querySelector('[onclick*=campanhas]'))">→ Ir para Campanhas</button></div></div>
@@ -733,7 +753,119 @@ function getPeriodLabel(){if(currentPeriod==='custom'&&customStart&&customEnd)re
 function setPeriod(p,el){currentPeriod=p;customStart=null;customEnd=null;document.querySelectorAll('.period-btn').forEach(b=>b.classList.remove('active'));if(el)el.classList.add('active');document.getElementById('period-start').value='';document.getElementById('period-end').value='';loadDashboard()}
 function setPeriodCustom(){const s=document.getElementById('period-start').value;const e=document.getElementById('period-end').value;if(s&&e){currentPeriod='custom';customStart=s;customEnd=e;document.querySelectorAll('.period-btn').forEach(b=>b.classList.remove('active'));loadDashboard()}}
 async function loadHome(){const[leads,convs]=await Promise.all([supa('leads?select=id,stage,created_at,phone,name&order=created_at.desc'),supa('conversas?select=id,status')]);allLeads=leads||[];if(leads){const el1=document.getElementById('hm-leads');if(el1)el1.textContent=leads.length}if(convs){const ab=convs.filter(c=>c.status==='aberta').length;const el2=document.getElementById('hm-conv');if(el2)el2.textContent=ab;document.getElementById('inbox-badge').textContent=convs.length}}
-async function loadDashboard(){document.getElementById('dash-period-label').textContent=getPeriodLabel();const[gastos,vendas,leads]=await Promise.all([supa('gastos?select=*&order=data.desc'),supa('vendas?select=*&order=data.desc'),supa('leads?select=id,stage,created_at,phone,name')]);allGastos=gastos||[];allVendas=vendas||[];allLeads=leads||allLeads;const{start,end,startStr,endStr}=getPeriodRange();const inRangeStr=ds=>{if(!ds)return false;const d=String(ds).slice(0,10);return d>=startStr&&d<=endStr};const inRangeDt=d=>{const dt=new Date(d);return dt>=start&&dt<end};const gastosP=allGastos.filter(g=>inRangeStr(g.data));const vendasP=allVendas.filter(v=>inRangeStr(v.data));const totalInvest=gastosP.reduce((s,g)=>s+Number(g.valor),0);const totalBruto=vendasP.reduce((s,v)=>s+Number(v.valor),0);const totalLiquido=totalBruto-totalInvest;const roi=totalInvest>0?((totalBruto-totalInvest)/totalInvest)*100:0;document.getElementById('k-invest').textContent=fmtBRL(totalInvest);document.getElementById('k-invest-sub').textContent=gastosP.length+' transações';document.getElementById('k-bruto').textContent=fmtBRL(totalBruto);document.getElementById('k-bruto-vendas').textContent=vendasP.length;document.getElementById('k-liquido').textContent=fmtBRL(totalLiquido);document.getElementById('k-liquido').style.color=totalLiquido>=0?'var(--gr)':'var(--rd)';document.getElementById('k-roi').textContent=totalInvest>0?roi.toFixed(0)+'%':'—';document.getElementById('k-roi').style.color=roi>=0?'var(--gr)':'var(--rd)';document.getElementById('k-roi-sub').textContent=totalInvest>0?(roi>=0?'positivo':'negativo'):'sem investimento';const canais={};gastosP.forEach(g=>{const c=g.categoria||g.canal||'Outros';canais[c]=(canais[c]||0)+Number(g.valor)});const canalIcons={'Meta WhatsApp':'📱','Tokens IA':'🤖','Servidores':'🚂','Tráfego':'📈','Equipe':'👥','Outros':'➕',Gemini:'🤖',Meta:'📱',Railway:'🚂',Supabase:'💾',Vercel:'▲',Trafego:'📈'};const sortedCanais=Object.entries(canais).sort((a,b)=>b[1]-a[1]);document.getElementById('invest-list').innerHTML=sortedCanais.length?sortedCanais.map(([c,v])=>{const pct=totalInvest>0?((v/totalInvest)*100).toFixed(0):0;const cnt=gastosP.filter(g=>(g.categoria||g.canal)===c).length;return`<div class="invest-item"><div class="invest-ic" style="background:var(--s2)">${canalIcons[c]||'💸'}</div><div class="invest-info"><div class="invest-nm">${c}</div><div class="invest-ds">${cnt} transação(ões)</div></div><div class="invest-vl">${fmtBRL(v)}</div><div class="invest-pct">${pct}%</div></div>`}).join(''):'<div class="empty"><p>Nenhum gasto no período</p></div>'}
+async function loadDashboard(){document.getElementById('dash-period-label').textContent=getPeriodLabel();const[gastos,vendas,leads]=await Promise.all([supa('gastos?select=*&order=data.desc'),supa('vendas?select=*&order=data.desc'),supa('leads?select=id,stage,created_at,phone,name')]);allGastos=gastos||[];allVendas=vendas||[];allLeads=leads||allLeads;const{start,end,startStr,endStr}=getPeriodRange();const inRangeStr=ds=>{if(!ds)return false;const d=String(ds).slice(0,10);return d>=startStr&&d<=endStr};const inRangeDt=d=>{const dt=new Date(d);return dt>=start&&dt<end};const gastosP=allGastos.filter(g=>inRangeStr(g.data));const vendasP=allVendas.filter(v=>inRangeStr(v.data));const totalInvest=gastosP.reduce((s,g)=>s+Number(g.valor),0);const totalBruto=vendasP.reduce((s,v)=>s+Number(v.valor),0);const totalLiquido=totalBruto-totalInvest;const roi=totalInvest>0?((totalBruto-totalInvest)/totalInvest)*100:0;document.getElementById('k-invest').textContent=fmtBRL(totalInvest);document.getElementById('k-invest-sub').textContent=gastosP.length+' transações';document.getElementById('k-bruto').textContent=fmtBRL(totalBruto);document.getElementById('k-bruto-vendas').textContent=vendasP.length;document.getElementById('k-liquido').textContent=fmtBRL(totalLiquido);document.getElementById('k-liquido').style.color=totalLiquido>=0?'var(--gr)':'var(--rd)';document.getElementById('k-roi').textContent=totalInvest>0?roi.toFixed(0)+'%':'—';document.getElementById('k-roi').style.color=roi>=0?'var(--gr)':'var(--rd)';document.getElementById('k-roi-sub').textContent=totalInvest>0?(roi>=0?'positivo':'negativo'):'sem investimento';const canais={};gastosP.forEach(g=>{const c=g.categoria||g.canal||'Outros';canais[c]=(canais[c]||0)+Number(g.valor)});const canalIcons={'Meta WhatsApp':'📱','Tokens IA':'🤖','Servidores':'🚂','Tráfego':'📈','Equipe':'👥','Outros':'➕',Gemini:'🤖',Meta:'📱',Railway:'🚂',Supabase:'💾',Vercel:'▲',Trafego:'📈'};const sortedCanais=Object.entries(canais).sort((a,b)=>b[1]-a[1]);document.getElementById('invest-list').innerHTML=sortedCanais.length?sortedCanais.map(([c,v])=>{const pct=totalInvest>0?((v/totalInvest)*100).toFixed(0):0;const cnt=gastosP.filter(g=>(g.categoria||g.canal)===c).length;return`<div class="invest-item"><div class="invest-ic" style="background:var(--s2)">${canalIcons[c]||'💸'}</div><div class="invest-info"><div class="invest-nm">${c}</div><div class="invest-ds">${cnt} transação(ões)</div></div><div class="invest-vl">${fmtBRL(v)}</div><div class="invest-pct">${pct}%</div></div>`}).join(''):'<div class="empty"><p>Nenhum gasto no período</p></div>';renderCharts(gastosP,vendasP,totalInvest,totalBruto)}
+
+function renderCharts(gastos,vendas,totalGastos,totalVendas){
+  // Determinar dias do gráfico (mínimo 7 pra dar visual decente)
+  const{startStr,endStr}=getPeriodRange();
+  const sd=new Date(startStr+'T00:00:00');
+  const ed=new Date(endStr+'T00:00:00');
+  let diasDiff=Math.round((ed-sd)/86400000)+1;
+  
+  // Se filtro for "Hoje", expande pra últimos 7 dias visualmente
+  let chartStart=sd;
+  if(diasDiff<=1){
+    chartStart=new Date(ed);
+    chartStart.setDate(chartStart.getDate()-6);
+    diasDiff=7;
+  }
+  
+  // Gera array de dias
+  const dias=[];
+  for(let i=0;i<diasDiff;i++){
+    const d=new Date(chartStart);
+    d.setDate(d.getDate()+i);
+    const ds=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+    dias.push({date:ds,label:String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')})
+  }
+  
+  // Soma gastos e vendas por dia
+  const allGastosFiltered=allGastos.filter(g=>{const d=String(g.data).slice(0,10);return d>=dias[0].date&&d<=dias[dias.length-1].date});
+  const allVendasFiltered=allVendas.filter(v=>{const d=String(v.data).slice(0,10);return d>=dias[0].date&&d<=dias[dias.length-1].date});
+  
+  const dadosGastos=dias.map(d=>{
+    const v=allGastosFiltered.filter(g=>String(g.data).slice(0,10)===d.date).reduce((s,g)=>s+Number(g.valor),0);
+    return{...d,valor:v}
+  });
+  const dadosVendas=dias.map(d=>{
+    const v=allVendasFiltered.filter(g=>String(g.data).slice(0,10)===d.date).reduce((s,g)=>s+Number(g.valor),0);
+    return{...d,valor:v}
+  });
+  
+  // Atualiza totais e subtitle
+  document.getElementById('chart-gastos-total').textContent=fmtBRL(totalGastos);
+  document.getElementById('chart-vendas-total').textContent=fmtBRL(totalVendas);
+  document.getElementById('chart-gastos-sub').textContent=`${diasDiff} ${diasDiff===1?'dia':'dias'} · ${gastos.length} transações`;
+  document.getElementById('chart-vendas-sub').textContent=`${diasDiff} ${diasDiff===1?'dia':'dias'} · ${vendas.length} vendas`;
+  
+  drawAreaChart('chart-gastos-wrap','tip-gastos',dadosGastos,'#EF4444','rgba(239,68,68,0.25)');
+  drawAreaChart('chart-vendas-wrap','tip-vendas',dadosVendas,'#10B981','rgba(16,185,129,0.25)');
+}
+
+function drawAreaChart(wrapId,tipId,dados,strokeColor,fillColor){
+  const wrap=document.getElementById(wrapId);
+  if(!wrap)return;
+  const tooltip=document.getElementById(tipId);
+  
+  if(!dados.length){wrap.innerHTML='<div class="chart-empty">Sem dados no período</div>';if(tooltip)wrap.appendChild(tooltip);return}
+  
+  // Dimensões do SVG
+  const W=400,H=180,PL=30,PR=10,PT=10,PB=22;
+  const innerW=W-PL-PR,innerH=H-PT-PB;
+  
+  const max=Math.max(...dados.map(d=>d.valor),0.01);
+  const stepX=dados.length>1?innerW/(dados.length-1):0;
+  
+  // Gera pontos
+  const points=dados.map((d,i)=>{
+    const x=PL+(dados.length>1?i*stepX:innerW/2);
+    const y=PT+innerH-(d.valor/max)*innerH;
+    return{x,y,...d}
+  });
+  
+  // Path da linha
+  const linePath=points.map((p,i)=>(i===0?'M':'L')+p.x+','+p.y).join(' ');
+  // Path da área (linha + fechamento)
+  const areaPath=linePath+` L${points[points.length-1].x},${PT+innerH} L${points[0].x},${PT+innerH} Z`;
+  
+  // Linhas de grade Y (3 níveis)
+  const grids=[];
+  for(let i=0;i<=3;i++){
+    const y=PT+(innerH*i/3);
+    const val=max*(1-i/3);
+    grids.push(`<line class="chart-grid-line" x1="${PL}" y1="${y}" x2="${W-PR}" y2="${y}"/><text class="chart-axis-label" x="${PL-5}" y="${y+3}" text-anchor="end">${val>=1000?(val/1000).toFixed(1)+'k':val.toFixed(0)}</text>`)
+  }
+  
+  // Labels eixo X (mostra só alguns pra não poluir)
+  const labelStep=Math.max(1,Math.ceil(dados.length/6));
+  const xLabels=points.map((p,i)=>(i%labelStep===0||i===points.length-1)?`<text class="chart-axis-label" x="${p.x}" y="${H-6}" text-anchor="middle">${p.label}</text>`:'').join('');
+  
+  // Dots interativos
+  const dots=points.map((p,i)=>`<circle class="chart-dot" cx="${p.x}" cy="${p.y}" r="3" fill="${strokeColor}" stroke="white" stroke-width="2" data-idx="${i}"/>`).join('');
+  
+  // Gradient ID único
+  const gradId='grad_'+wrapId;
+  
+  wrap.innerHTML=`<svg class="chart-svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><defs><linearGradient id="${gradId}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${strokeColor}" stop-opacity="0.4"/><stop offset="100%" stop-color="${strokeColor}" stop-opacity="0"/></linearGradient></defs>${grids.join('')}${xLabels}<path d="${areaPath}" fill="url(#${gradId})"/><path d="${linePath}" fill="none" stroke="${strokeColor}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>${dots}</svg>`;
+  if(tooltip)wrap.appendChild(tooltip);
+  
+  // Hover nos dots
+  wrap.querySelectorAll('.chart-dot').forEach(dot=>{
+    dot.addEventListener('mouseenter',e=>{
+      const i=parseInt(e.target.getAttribute('data-idx'));
+      const p=points[i];
+      e.target.setAttribute('r','5');
+      if(tooltip){tooltip.classList.add('show');tooltip.innerHTML=`<div>${p.label}</div><div style="font-size:13px;font-weight:800">${fmtBRL(p.valor)}</div>`;
+        const wrapRect=wrap.getBoundingClientRect();
+        const xPct=(p.x/W)*100;
+        const yPct=(p.y/H)*100;
+        tooltip.style.left=xPct+'%';
+        tooltip.style.top=yPct+'%'
+      }
+    });
+    dot.addEventListener('mouseleave',e=>{e.target.setAttribute('r','3');if(tooltip)tooltip.classList.remove('show')});
+  });
+}
 function toggleInvestDetail(){document.getElementById('invest-detail').classList.toggle('open')}
 async function salvarGasto(){const categoria=document.getElementById('g-categoria').value;const valor=parseFloat(document.getElementById('g-valor').value);const data=document.getElementById('g-data').value;const desc=document.getElementById('g-desc').value;const recorrente=document.getElementById('g-recorrente').checked;const recDia=parseInt(document.getElementById('g-recorrencia-dia').value)||null;if(!categoria||!valor||!data){showToast('Preencha categoria, valor e data');return}const payload={canal:categoria,valor,data,descricao:desc||null,categoria,recorrente:!!recorrente,source:recorrente?'recorrente':'manual'};if(recorrente){if(!recDia||recDia<1||recDia>31){showToast('Defina o dia do mês (1-31)');return}payload.recorrencia_dia=recDia}const r=await supaInsert('gastos',payload);if(r){showToast(recorrente?'✓ Gasto recorrente cadastrado':'✓ Gasto registrado');closeModal('m-gasto');loadDashboard()}else showToast('Erro ao salvar')}
 function toggleRecorrenciaDay(){const ck=document.getElementById('g-recorrente');const wrap=document.getElementById('g-recorrente-day-wrap');if(ck&&wrap)wrap.style.display=ck.checked?'block':'none'}
