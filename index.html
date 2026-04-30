@@ -666,7 +666,7 @@ const SUPA_URL='https://xqdlvtjvvgbpaxprnorn.supabase.co';
 const SUPA_KEY='sb_publishable_vhGzY7v93kTZ32_CFj4lVA_M6S7WUWA';
 const BACKEND_URL='https://clara-instructiva-production.up.railway.app';
 
-let currentUser=null,allLeads=[],allConvs=[],allGastos=[],allVendas=[],convTab='all',agents=[],editingId=null,currentPeriod='hoje',customStart=null,customEnd=null,inboxPollInterval=null,openConvId=null,inboxView='inbox',filterCampanhaId='',filterStatus='',filterData='';
+let currentUser=null,allLeads=[],allConvs=[],allGastos=[],allVendas=[],convTab='all',agents=[],editingId=null,currentPeriod='hoje',customStart=null,customEnd=null,inboxPollInterval=null,openConvId=null,inboxView='inbox',filterCampanhaId='',filterStatus='',filterData='',unreadCounts={};
 
 function getUsers(){return JSON.parse(localStorage.getItem('clara-users')||'[]')}
 function saveUsers(u){localStorage.setItem('clara-users',JSON.stringify(u))}
