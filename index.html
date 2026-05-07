@@ -854,7 +854,7 @@ function drawAreaChart(wrapId,tipId,dados,strokeColor,fillColor){
     dot.addEventListener('mouseenter',e=>{
       const i=parseInt(e.target.getAttribute('data-idx'));
       const p=points[i];
-      e.target.setAttribute('r','5');
+      e.target.style.opacity='0.85';
       if(tooltip){tooltip.classList.add('show');tooltip.innerHTML=`<div>${p.label}</div><div style="font-size:13px;font-weight:800">${fmtBRL(p.valor)}</div>`;
         const wrapRect=wrap.getBoundingClientRect();
         const xPct=(p.x/W)*100;
