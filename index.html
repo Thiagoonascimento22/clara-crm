@@ -863,7 +863,7 @@ function drawAreaChart(wrapId,tipId,dados,strokeColor,fillColor){
         tooltip.style.top=yPct+'%'
       }
     });
-    dot.addEventListener('mouseleave',e=>{e.target.setAttribute('r','3');if(tooltip)tooltip.classList.remove('show')});
+    dot.addEventListener('mouseleave',e=>{e.target.style.opacity='1';if(tooltip)tooltip.classList.remove('show')});
   });
 }
 function toggleInvestDetail(){document.getElementById('invest-detail').classList.toggle('open')}
