@@ -846,7 +846,7 @@ function drawAreaChart(wrapId,tipId,dados,strokeColor,fillColor){
   // Gradient ID único
   const gradId='grad_'+wrapId;
   
-  wrap.innerHTML=`<svg class="chart-svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><defs><linearGradient id="${gradId}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${strokeColor}" stop-opacity="0.4"/><stop offset="100%" stop-color="${strokeColor}" stop-opacity="0"/></linearGradient></defs>${grids.join('')}${xLabels}<path d="${areaPath}" fill="url(#${gradId})"/><path d="${linePath}" fill="none" stroke="${strokeColor}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>${dots}</svg>`;
+  const slotW=innerW/dados.length;const bw=slotW*0.62;const barsHtml=points.map((p,i)=>{const valForY=Math.max(p.valor,0);const h=Math.max((valForY/max)*innerH,2);const bx=PL+slotW*i+(slotW-bw)/2;const by=PT+innerH-h;return`<rect class="chart-bar" x="${bx}" y="${by}" width="${bw}" height="${h}" rx="3" fill="url(#${gradId})" data-idx="${i}"/>`}).join('');wrap.innerHTML=`<svg class="chart-svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><defs><linearGradient id="${gradId}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${strokeColor}" stop-opacity="1"/><stop offset="100%" stop-color="${strokeColor}" stop-opacity="0.3"/></linearGradient></defs>${grids.join('')}${xLabels}${barsHtml}</svg>`;
   if(tooltip)wrap.appendChild(tooltip);
   
   // Hover nos dots
