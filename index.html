@@ -850,7 +850,7 @@ function drawAreaChart(wrapId,tipId,dados,strokeColor,fillColor){
   if(tooltip)wrap.appendChild(tooltip);
   
   // Hover nos dots
-  wrap.querySelectorAll('.chart-dot').forEach(dot=>{
+  wrap.querySelectorAll('.chart-bar').forEach(dot=>{
     dot.addEventListener('mouseenter',e=>{
       const i=parseInt(e.target.getAttribute('data-idx'));
       const p=points[i];
