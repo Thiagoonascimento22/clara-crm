@@ -695,7 +695,7 @@ async function doLogin(){
   launchApp(currentUser);
 }
 function doLogout(){const auth=JSON.parse(localStorage.getItem('clara-auth')||'null');if(auth?.access_token){fetch(`${SUPA_URL}/auth/v1/logout`,{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':`Bearer ${auth.access_token}`}}).catch(()=>{})}localStorage.removeItem('clara-auth');localStorage.removeItem('clara-session');currentUser=null;document.getElementById('app').classList.remove('show');document.getElementById('login-screen').style.display='flex'}
-function launchApp(user){document.getElementById('login-screen').style.display='none';document.getElementById('app').classList.add('show');updateUserUI(user);applyPermissions();setGreeting();loadHome()}
+function launchApp(user){document.getElementById('login-screen').style.display='none';document.getElementById('app').classList.add('show');updateUserUI(user);applyPermissions();setGreeting();loadHome();inicializarSuperAdmin()}
 function applyPermissions(){
   // Esconde aba Equipe pra quem não é admin
   const equipeTab=document.getElementById('cfg-ni-equipe');
