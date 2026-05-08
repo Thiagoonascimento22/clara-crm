@@ -690,7 +690,7 @@ async function doLogin(){
   if(!users||!users.length){document.getElementById('login-err').textContent='E-mail ou senha incorretos';document.getElementById('login-err').style.display='block';return}
   document.getElementById('login-err').style.display='none';
   const u=users[0];
-  currentUser={id:u.id,name:u.nome,email:u.email,role:u.role,cargo:u.cargo,avatar:u.avatar,auth_user_id:authData.user.id};
+  currentUser={id:u.id,name:u.nome,email:u.email,role:u.role,cargo:u.cargo,avatar:u.avatar,auth_user_id:authData.user.id,is_super_admin:u.is_super_admin||false};
   localStorage.setItem('clara-session',JSON.stringify(currentUser));
   launchApp(currentUser);
 }
