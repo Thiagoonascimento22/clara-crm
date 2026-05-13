@@ -1027,7 +1027,7 @@ async function saveAgente(){const nome=document.getElementById('ag-nome').value.
 async function loadLeads(filter='todos',q=''){const leads=await supa('leads?select=*&order=created_at.desc');allLeads=leads||[];let list=allLeads;if(filter!=='todos')list=list.filter(l=>(l.stage||'novo')===filter);if(q)list=list.filter(l=>JSON.stringify(l).toLowerCase().includes(q.toLowerCase()));document.getElementById('leads-sub').textContent=`${list.length} de ${allLeads.length} leads`;const pc=s=>({novo:'pill-b',qualificado:'pill-y',negociando:'pill-p',matriculado:'pill-g',perdido:'pill-r'}[s]||'pill-b');document.getElementById('leads-tbody').innerHTML=list.length?list.map((l,i)=>`<tr><td style="color:var(--t3)">${i+1}</td><td class="fmono">${fmtPhone(l.phone)}</td><td>${l.name||'<span style="color:var(--t3)">—</span>'}</td><td><span class="pill ${pc(l.stage||'novo')}">${l.stage||'novo'}</span></td><td style="color:var(--t2)">${new Date(l.created_at).toLocaleDateString('pt-BR')}</td></tr>`).join(''):'<tr><td colspan="5"><div class="empty"><p>Nenhum lead</p></div></td></tr>'}
 function filterLeads(v){loadLeads(v)}
 function searchLeads(q){loadLeads('todos',q)}
-async function loadCanalStats(){const el=document.getElementById('canais-container');el.innerHTML='<div class="empty"><p>Carregando números...</p></div>';try{const myNumbersResp=await backend('/api/whatsapp-numbers');const myNumbers=myNumbersResp.ok?(myNumbersResp.data?.data||[]):[];const sub=document.getElementById('canais-sub');if(sub)sub.textContent=myNumbers.length?`${myNumbers.length} número(s) cadastrado(s) — gerencie aqui`:'Nenhum número cadastrado ainda';let html='<div class="wpp-section-hd"><h3>📱 Números cadastrados no Forge Sales</h3></div>';if(myNumbers.length){html+='<div class="wpp-numbers-grid">';html+=myNumbers.map(n=>renderWppNumberCard(n)).join('');html+='</div>'}else{html+='<div class="empty-state"><h3>Nenhum número cadastrado</h3><p>Clique em "+ Adicionar Número" no topo da página pra cadastrar o primeiro.</p><p style="margin-top:8px;font-size:11px">Você vai precisar do Phone Number ID e Access Token do Meta Business Manager.</p></div>'}html+=`<div style="margin-top:30px;padding-top:24px;border-top:1px solid var(--b1)"><div class="wpp-section-hd"><h3 style="color:var(--t1)">🏢 Contas WhatsApp Business (Meta API)</h3></div><div id="canais-meta-info"><div class="empty"><p>Carregando...</p></div></div></div>`;el.innerHTML=html;loadMetaWabaInfo()}catch(err){console.error('loadCanalStats:',err);el.innerHTML='<div class="empty-state"><h3>Erro ao carregar</h3><p>'+err.message+'</p></div>'}}
+async function loadCanalStats(){const el=document.getElementById('canais-container');el.innerHTML='<div class="empty"><p>Carregando números...</p></div>';try{const myNumbersResp=await backend('/api/whatsapp-numbers');const myNumbers=myNumbersResp.ok?(myNumbersResp.data?.data||[]):[];const sub=document.getElementById('canais-sub');if(sub)sub.textContent=myNumbers.length?`${myNumbers.length} número(s) cadastrado(s) — gerencie aqui`:'Nenhum número cadastrado ainda';let html='<div class="wpp-section-hd"><h3>📱 Números cadastrados no Forge Sales</h3></div>';if(myNumbers.length){html+='<div class="wpp-numbers-grid">';html+=myNumbers.map(n=>renderWppNumberCard(n)).join('');html+='</div>'}else{html+='<div class="empty-state"><h3>Nenhum número cadastrado</h3><p>Clique em "+ Adicionar Número" no topo da página pra cadastrar o primeiro.</p><p style="margin-top:8px;font-size:11px">Você vai precisar do Phone Number ID e Access Token do Meta Business Manager.</p></div>'}html+=`<div style="margin-top:30px;padding-top:24px;border-top:1px solid var(--b1)"><div class="wpp-section-hd" style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="color:var(--t1);margin:0">🏢 Contas WhatsApp Business (Meta API)</h3><button class="btn btn-p btn-sm" onclick="openWabaModal()" style="font-size:12px">+ Adicionar WABA</button></div><div id="canais-meta-info" style="margin-top:14px"><div class="empty"><p>Carregando...</p></div></div></div>`;el.innerHTML=html;loadMetaWabaInfo()}catch(err){console.error('loadCanalStats:',err);el.innerHTML='<div class="empty-state"><h3>Erro ao carregar</h3><p>'+err.message+'</p></div>'}}
 function renderWppNumberCard(n){const qualClass=n.qualidade?`q-${n.qualidade}`:'';const qualLabel=n.qualidade==='alta'?'🟢 Alta':n.qualidade==='media'?'🟡 Média':n.qualidade==='baixa'?'🔴 Baixa':'';const tierLabel=n.tier==='unlimited'?'Ilimitado':(n.tier?`${n.tier}/dia`:'');const safe=(s)=>String(s||'').replace(/</g,'&lt;').replace(/"/g,'&quot;');return `<div class="wpp-num-card${n.ativo?'':' inactive'}"><div class="wpp-num-h"><div><div class="wpp-num-name">${safe(n.nome)}</div>${n.display_phone?`<div class="wpp-num-phone">${safe(n.display_phone)}</div>`:''}</div><span style="font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;${n.ativo?'background:var(--grl);color:var(--gr)':'background:var(--bg);color:var(--t3)'}">${n.ativo?'ATIVO':'INATIVO'}</span></div><div class="wpp-num-stats">${qualLabel?`<span class="wpp-num-tag ${qualClass}">${qualLabel}</span>`:''}${tierLabel?`<span class="wpp-num-tag">${tierLabel}</span>`:''}</div><div class="wpp-num-id" onclick="copyToClipboard('${safe(n.phone_number_id)}','✓ Phone Number ID copiado')" title="Clique pra copiar">${safe(n.phone_number_id)}</div>${n.notas?`<div style="font-size:11px;color:var(--t3);margin-bottom:10px;padding:6px 8px;background:var(--bg);border-radius:6px;line-height:1.4">${safe(n.notas)}</div>`:''}<div class="wpp-num-acts"><button class="btn btn-g btn-xs" onclick="openNumberModal('${n.id}')">✏️ Editar</button><button class="btn btn-g btn-xs" onclick="testNumberById('${n.id}')">🧪 Testar</button><button class="btn btn-xs" style="background:var(--rdl);border:1px solid var(--rdb);color:var(--rd)" onclick="removeWppNumber('${n.id}')">⏸ ${n.ativo?'Desativar':'Reativar'}</button></div></div>`}
 
 async function loadMetaWabaInfo(){const el=document.getElementById('canais-meta-info');if(!el)return;try{const r=await backend('/api/wabas');if(!r.ok||!r.data?.ok){el.innerHTML=`<div class="empty"><p style="font-size:11px;color:var(--t3)">Não foi possível buscar as WABAs do banco.</p></div>`;return}const wabas=r.data.data||[];const orfaos=r.data.orfaos||[];if(!wabas.length&&!orfaos.length){el.innerHTML=`<div class="empty"><p>Nenhuma WABA cadastrada ainda</p></div>`;return}const safe=(s)=>String(s||'').replace(/</g,'&lt;').replace(/"/g,'&quot;');const initials=(name)=>String(name||'W').split(/\s+/).map(p=>p[0]||'').join('').slice(0,2).toUpperCase();const fmtPhone=(p)=>{if(!p)return'';const s=String(p).replace(/\D/g,'');if(s.length===11)return`(${s.slice(0,2)}) ${s.slice(2,7)}-${s.slice(7)}`;if(s.length===13)return`(${s.slice(2,4)}) ${s.slice(4,9)}-${s.slice(9)}`;return p};const qualBadge=(q)=>{if(q==='alta')return'<span style="font-size:10px;padding:2px 6px;border-radius:6px;background:var(--grl);color:var(--gr);font-weight:700">🟢 Alta</span>';if(q==='media')return'<span style="font-size:10px;padding:2px 6px;border-radius:6px;background:#fef3c7;color:#92400e;font-weight:700">🟡 Média</span>';if(q==='baixa')return'<span style="font-size:10px;padding:2px 6px;border-radius:6px;background:var(--rdl);color:var(--rd);font-weight:700">🔴 Baixa</span>';return'';};let html=wabas.map(w=>{const nums=w.numeros||[];const numerosHtml=nums.length?nums.map(n=>`<div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--bg);border-radius:8px;margin-top:6px"><div style="position:relative;width:36px;height:36px;flex-shrink:0"><div onclick='_trocarFoto(${JSON.stringify(n.id)}, ${JSON.stringify(n.nome||"")})' style="width:36px;height:36px;border-radius:50%;background:var(--bg2);display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;overflow:hidden" title="Clique pra trocar a foto do WhatsApp">${n.avatar_url?`<img src="${safe(n.avatar_url)}" style="width:100%;height:100%;object-fit:cover" alt="">`:`<span style="font-size:11px;font-weight:700;color:var(--t3)">${initials(n.nome)}</span>`}</div><div style="position:absolute;bottom:-2px;right:-2px;width:16px;height:16px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:9px;border:1px solid var(--b1);pointer-events:none">📷</div></div><div style="flex:1;min-width:0"><div style="font-size:12.5px;font-weight:600;color:var(--t1)">${safe(n.nome)}</div><div style="font-size:11px;color:var(--t3);font-family:ui-monospace,monospace">+55 ${safe(fmtPhone(n.display_phone))}</div></div>${qualBadge(n.qualidade)}</div>`).join(''):'<div style="font-size:11px;color:var(--t3);padding:8px;text-align:center">Nenhum número nesta WABA</div>';return`<div style="background:var(--bg2);border:1px solid var(--b1);border-radius:12px;padding:14px;margin-bottom:12px"><div style="display:flex;align-items:center;gap:12px;margin-bottom:8px"><div style="width:44px;height:44px;border-radius:50%;background:var(--grl);color:var(--gr);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0">${initials(w.apelido)}</div><div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:700;color:var(--t1)">${safe(w.apelido)}</div><div style="font-size:11px;color:var(--t3);font-family:ui-monospace,monospace">WABA ID: ${safe(w.waba_id)}</div></div><span style="font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;${w.status==='active'?'background:var(--grl);color:var(--gr)':'background:var(--bg);color:var(--t3)'}">${w.status==='active'?'ATIVA':String(w.status||'').toUpperCase()}</span></div>${numerosHtml}</div>`}).join('');if(orfaos.length){html+=`<div style="background:var(--rdl);border:1px solid var(--rdb);border-radius:12px;padding:12px;margin-top:8px"><div style="font-size:12px;font-weight:700;color:var(--rd);margin-bottom:4px">⚠️ ${orfaos.length} número(s) sem WABA vinculada</div><div style="font-size:11px;color:var(--t3)">Esses números aparecem em "Números cadastrados" acima mas não foram ligados a nenhuma WABA. Edite cada um e preencha o WABA ID.</div></div>`}el.innerHTML=html}catch(e){console.error('loadMetaWabaInfo:',e);el.innerHTML=`<div class="empty"><p>Erro ao carregar WABAs</p></div>`}}
@@ -1057,6 +1057,105 @@ window._trocarFoto = function(numeroId, nome) {
     }
   };
   input.click();
+};
+
+// Abre modal de cadastrar nova WABA com todos os números de uma vez
+window.openWabaModal = function() {
+  const existing = document.getElementById('waba-modal-overlay');
+  if (existing) existing.remove();
+  const overlay = document.createElement('div');
+  overlay.id = 'waba-modal-overlay';
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);display:flex;align-items:flex-start;justify-content:center;padding-top:60px;z-index:9999;overflow-y:auto';
+  overlay.innerHTML = `
+    <div style="background:var(--bg);border-radius:14px;width:520px;max-width:calc(100% - 32px);box-shadow:0 20px 60px rgba(0,0,0,0.3);overflow:hidden">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--b1)">
+        <div>
+          <div style="font-size:16px;font-weight:700;color:var(--t1)">+ Adicionar nova WABA</div>
+          <div style="font-size:12px;color:var(--t3);margin-top:2px">Cadastra a WABA inteira — os números são importados automaticamente</div>
+        </div>
+        <button onclick="document.getElementById('waba-modal-overlay').remove()" style="background:transparent;border:0;font-size:20px;cursor:pointer;color:var(--t3);padding:4px 8px">×</button>
+      </div>
+      <div style="padding:20px">
+        <div style="margin-bottom:14px">
+          <label style="display:block;font-size:11px;font-weight:600;color:var(--t2);margin-bottom:4px">APELIDO (interno) *</label>
+          <input id="waba-modal-apelido" type="text" placeholder="Ex: Vendas Curso XYZ" style="width:100%;box-sizing:border-box;padding:8px 12px;border:1px solid var(--b1);border-radius:8px;background:var(--bg2);color:var(--t1);font-size:13px">
+        </div>
+        <div style="margin-bottom:14px">
+          <label style="display:block;font-size:11px;font-weight:600;color:var(--t2);margin-bottom:4px">WABA ID *</label>
+          <input id="waba-modal-wabaid" type="text" placeholder="Ex: 1234567890123456" style="width:100%;box-sizing:border-box;padding:8px 12px;border:1px solid var(--b1);border-radius:8px;background:var(--bg2);color:var(--t1);font-size:13px;font-family:ui-monospace,monospace">
+          <p style="margin:4px 0 0;font-size:10.5px;color:var(--t3)">business.facebook.com → Gerenciador do WhatsApp → Configurações da conta</p>
+        </div>
+        <div style="margin-bottom:14px">
+          <label style="display:block;font-size:11px;font-weight:600;color:var(--t2);margin-bottom:4px">Business Manager ID (opcional)</label>
+          <input id="waba-modal-bizid" type="text" placeholder="Ex: 1100650259793713" style="width:100%;box-sizing:border-box;padding:8px 12px;border:1px solid var(--b1);border-radius:8px;background:var(--bg2);color:var(--t1);font-size:13px;font-family:ui-monospace,monospace">
+        </div>
+        <div style="margin-bottom:14px">
+          <label style="display:block;font-size:11px;font-weight:600;color:var(--t2);margin-bottom:4px">Access Token (System User) *</label>
+          <input id="waba-modal-token" type="password" placeholder="EAAxxxxxxxxxxxxxxxx" style="width:100%;box-sizing:border-box;padding:8px 12px;border:1px solid var(--b1);border-radius:8px;background:var(--bg2);color:var(--t1);font-size:13px;font-family:ui-monospace,monospace">
+          <p style="margin:4px 0 0;font-size:10.5px;color:var(--t3)">Permissões necessárias: whatsapp_business_management + whatsapp_business_messaging</p>
+        </div>
+        <div id="waba-modal-status" style="display:none;padding:10px 12px;border-radius:8px;font-size:12px;margin-bottom:14px"></div>
+      </div>
+      <div style="display:flex;gap:8px;padding:14px 20px;border-top:1px solid var(--b1);background:var(--bg2)">
+        <button onclick="document.getElementById('waba-modal-overlay').remove()" class="btn btn-sm" style="flex:1">Cancelar</button>
+        <button id="waba-modal-save" onclick="saveWaba()" class="btn btn-p btn-sm" style="flex:2">🔌 Conectar e importar números</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+  setTimeout(() => document.getElementById('waba-modal-apelido')?.focus(), 100);
+};
+
+window.saveWaba = async function() {
+  const apelido = document.getElementById('waba-modal-apelido').value.trim();
+  const waba_id = document.getElementById('waba-modal-wabaid').value.trim();
+  const business_id = document.getElementById('waba-modal-bizid').value.trim() || null;
+  const access_token = document.getElementById('waba-modal-token').value.trim();
+  const statusEl = document.getElementById('waba-modal-status');
+  const btnSave = document.getElementById('waba-modal-save');
+
+  if (!apelido || !waba_id || !access_token) {
+    statusEl.style.display = 'block';
+    statusEl.style.background = 'var(--rdl)';
+    statusEl.style.color = 'var(--rd)';
+    statusEl.textContent = '❌ Preencha apelido, WABA ID e Access Token';
+    return;
+  }
+
+  btnSave.disabled = true;
+  btnSave.textContent = '⏳ Validando com a Meta...';
+  statusEl.style.display = 'block';
+  statusEl.style.background = 'var(--bg2)';
+  statusEl.style.color = 'var(--t2)';
+  statusEl.textContent = 'Conectando à Meta API e importando números...';
+
+  try {
+    const r = await backend('/api/wabas', {
+      method: 'POST',
+      body: JSON.stringify({ apelido, waba_id, business_id, access_token })
+    });
+    if (r.ok && r.data?.ok) {
+      statusEl.style.background = 'var(--grl)';
+      statusEl.style.color = 'var(--gr)';
+      statusEl.innerHTML = `✅ ${r.data.message}<br><span style="font-size:11px;opacity:0.85">${r.data.importados?.length || 0} importado(s)${r.data.ignorados?.length ? `, ${r.data.ignorados.length} já existia(m)` : ''}</span>`;
+      setTimeout(() => {
+        document.getElementById('waba-modal-overlay').remove();
+        loadCanalStats();
+      }, 2500);
+    } else {
+      statusEl.style.background = 'var(--rdl)';
+      statusEl.style.color = 'var(--rd)';
+      statusEl.textContent = '❌ ' + (r.data?.error || 'Erro desconhecido');
+      btnSave.disabled = false;
+      btnSave.textContent = '🔌 Conectar e importar números';
+    }
+  } catch (err) {
+    statusEl.style.background = 'var(--rdl)';
+    statusEl.style.color = 'var(--rd)';
+    statusEl.textContent = '❌ ' + err.message;
+    btnSave.disabled = false;
+    btnSave.textContent = '🔌 Conectar e importar números';
+  }
 };
 
 let editingWppNumberId=null;
