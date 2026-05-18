@@ -752,6 +752,69 @@ tr:hover td{background:var(--s2)}
 .home-card-t{font-size:15px;font-weight:700;color:var(--t1);margin-bottom:5px;letter-spacing:-.022em}
 .home-card-d{font-size:12.5px;color:var(--t3);font-weight:500;line-height:1.55;letter-spacing:-.005em}
 
+/* HOME — Dashboard Executivo */
+.home-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.home-stat{background:var(--w);border:0.5px solid var(--b1);border-radius:11px;padding:14px 16px;display:flex;align-items:center;gap:13px;cursor:pointer;transition:all .15s;box-shadow:var(--shadow-card)}
+.home-stat:hover{border-color:var(--b2);transform:translateY(-1px);box-shadow:var(--shadow-card-h)}
+.home-stat-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.home-stat-icon i{font-size:20px;line-height:1}
+.home-stat-icon.yw{background:rgba(245,158,11,.12);color:var(--yw)}
+.home-stat-icon.bl{background:rgba(59,130,246,.12);color:var(--bl)}
+.home-stat-icon.pu{background:rgba(168,85,247,.12);color:var(--pu)}
+.home-stat-icon.gr{background:rgba(16,185,129,.12);color:var(--gr)}
+.home-stat-icon.br{background:rgba(99,102,241,.12);color:var(--br)}
+[data-theme="light"] .home-stat-icon.yw{background:#fef3c7;color:#d97706}
+[data-theme="light"] .home-stat-icon.bl{background:#dbeafe;color:#2563eb}
+[data-theme="light"] .home-stat-icon.pu{background:#ede9fe;color:#7c3aed}
+[data-theme="light"] .home-stat-icon.gr{background:#d1fae5;color:#059669}
+[data-theme="light"] .home-stat-icon.br{background:#e0e7ff;color:#4f46e5}
+.home-stat-body{flex:1;min-width:0}
+.home-stat-n{font-size:22px;font-weight:700;letter-spacing:-.025em;line-height:1.1;font-feature-settings:"tnum";color:var(--t1)}
+.home-stat-l{font-size:11.5px;color:var(--t3);font-weight:500;margin-top:3px;letter-spacing:-.005em}
+
+.home-grid{display:grid;grid-template-columns:1.85fr 1fr;gap:14px;align-items:start}
+@media (max-width:1100px){.home-grid{grid-template-columns:1fr}.home-stats{grid-template-columns:repeat(2,1fr)}}
+
+.home-block{background:var(--w);border:0.5px solid var(--b1);border-radius:var(--rxl);overflow:hidden;box-shadow:var(--shadow-card)}
+.home-block-h{padding:16px 20px;border-bottom:0.5px solid var(--b1);display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.home-block-t{font-size:14px;font-weight:600;letter-spacing:-.018em;color:var(--t1)}
+.home-block-s{font-size:11.5px;color:var(--t3);font-weight:500;margin-top:3px}
+
+.home-attention-list{padding:4px 0}
+.home-attention-item{display:flex;align-items:center;gap:12px;padding:11px 20px;cursor:pointer;transition:background .12s;border-bottom:0.5px solid var(--b1)}
+.home-attention-item:last-child{border-bottom:none}
+.home-attention-item:hover{background:var(--s2)}
+.home-att-av{width:34px;height:34px;border-radius:9px;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0;letter-spacing:-.02em;box-shadow:var(--shadow-av)}
+.home-att-info{flex:1;min-width:0}
+.home-att-name{font-size:13px;font-weight:500;color:var(--t1);letter-spacing:-.008em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.home-att-meta{font-size:11px;color:var(--yw);font-weight:500;margin-top:2px;display:flex;align-items:center;gap:4px}
+.home-att-arr{color:var(--t4);font-size:14px;flex-shrink:0;transition:transform .15s}
+.home-attention-item:hover .home-att-arr{transform:translateX(2px);color:var(--br)}
+
+.home-col-side{display:flex;flex-direction:column;gap:10px}
+.home-quick-card{background:var(--w);border:0.5px solid var(--b1);border-radius:11px;padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all .15s;box-shadow:var(--shadow-card)}
+.home-quick-card:hover{border-color:var(--brb);background:var(--brl);transform:translateX(2px)}
+.home-quick-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.home-quick-icon i{font-size:18px;line-height:1}
+.home-quick-icon.br{background:rgba(99,102,241,.12);color:var(--br)}
+.home-quick-icon.pu{background:rgba(168,85,247,.12);color:var(--pu)}
+.home-quick-icon.yw{background:rgba(245,158,11,.12);color:var(--yw)}
+.home-quick-icon.gr{background:rgba(16,185,129,.12);color:var(--gr)}
+[data-theme="light"] .home-quick-icon.br{background:#e0e7ff;color:#4f46e5}
+[data-theme="light"] .home-quick-icon.pu{background:#ede9fe;color:#7c3aed}
+[data-theme="light"] .home-quick-icon.yw{background:#fef3c7;color:#d97706}
+[data-theme="light"] .home-quick-icon.gr{background:#d1fae5;color:#059669}
+.home-quick-info{flex:1;min-width:0}
+.home-quick-t{font-size:13.5px;font-weight:600;color:var(--t1);letter-spacing:-.012em}
+.home-quick-s{font-size:11.5px;color:var(--t3);font-weight:500;margin-top:1px}
+.home-quick-arr{color:var(--t4);font-size:14px;flex-shrink:0;transition:all .15s}
+.home-quick-card:hover .home-quick-arr{color:var(--br);transform:translateX(2px)}
+
+/* Hero mais compacto */
+.hero{padding:32px 36px;margin-bottom:18px}
+.hero-title{font-size:30px;margin-bottom:10px}
+.hero-sub{font-size:13.5px;margin-bottom:20px;max-width:none;color:var(--t2)}
+
 /* ============== TOAST ============== */
 .toast{position:fixed;bottom:24px;right:24px;background:var(--t1);color:var(--bg);padding:11px 17px;border-radius:9px;font-size:12.5px;font-weight:600;z-index:9999;box-shadow:var(--shadow-toast);max-width:340px;opacity:0;transform:translateY(10px);transition:all .25s;letter-spacing:-.008em}
 .toast.show{opacity:1;transform:translateY(0)}
@@ -794,8 +857,74 @@ tr:hover td{background:var(--s2)}
 <main class="main">
 <div class="topbar"><span class="tb-title" id="page-title">Início</span><div style="display:flex;gap:8px"><button class="btn btn-g btn-sm" onclick="loadAll()">↻ Atualizar</button></div></div>
 <div class="content">
-<div class="page active" id="page-home"><div class="hero"><div class="hero-grid-bg"></div><div class="hero-mini"><div class="hero-mini-item"><div class="hero-mini-n" id="hm-conv">—</div><div class="hero-mini-l">Conversas</div></div><div class="hero-mini-divider"></div><div class="hero-mini-item"><div class="hero-mini-n" id="hm-leads">—</div><div class="hero-mini-l">Leads</div></div></div><div class="hero-content"><div class="hero-pill"><span class="live-dot"></span>SISTEMA AO VIVO</div><div class="hero-greeting" id="greeting">Boa noite,</div><div class="hero-title"><span id="welcome-name">Thiago.</span> <span style="font-size:0.85em">👋</span></div><div class="hero-sub">Tudo no lugar pra você fechar mais hoje. Conversas, leads, dashboard — todos te esperando.</div><div class="hero-actions"><button class="hero-btn hero-btn-p" onclick="go('campanhas',document.querySelector('[onclick*=campanhas]'))"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Nova Campanha</button><button class="hero-btn hero-btn-g" onclick="go('inbox',document.querySelector('[onclick*=inbox]'))"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Caixa de Entrada</button><button class="hero-btn hero-btn-g" onclick="go('dashboard',document.querySelector('[onclick*=dashboard]'))"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Dashboard</button></div></div></div>
-<div class="home-cards"><div class="home-card" onclick="go('campanhas',document.querySelector('[onclick*=campanhas]'))"><div class="home-card-h"><div class="home-card-icon" style="background:var(--brl)"><svg fill="none" stroke="var(--br)" viewBox="0 0 24 24"><path d="M3 3h18v18H3z"/><path d="M3 9h18M9 21V9"/></svg></div><span class="home-card-arr"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div><div class="home-card-t">Campanhas</div><div class="home-card-d">Crie disparos em massa com IA conduzindo a conversa até o fechamento.</div></div><div class="home-card" onclick="go('agentes',document.querySelector('[onclick*=agentes]'))"><div class="home-card-h"><div class="home-card-icon" style="background:var(--pul)"><svg fill="none" stroke="var(--pu)" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/></svg></div><span class="home-card-arr"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div><div class="home-card-t">Agentes IA</div><div class="home-card-d">Treine sua Clara com base de conhecimento, scripts e objeções específicas.</div></div><div class="home-card" onclick="go('dashboard',document.querySelector('[onclick*=dashboard]'))"><div class="home-card-h"><div class="home-card-icon" style="background:var(--grl)"><svg fill="none" stroke="var(--gr)" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div><span class="home-card-arr"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div><div class="home-card-t">ROI em tempo real</div><div class="home-card-d">Acompanhe investimento, faturamento e conversão por período personalizado.</div></div></div></div>
+<div class="page active" id="page-home">
+<div class="hero">
+<div class="hero-grid-bg"></div>
+<div class="hero-content">
+<div class="hero-pill"><span class="live-dot"></span>SISTEMA AO VIVO</div>
+<div class="hero-greeting" id="greeting">Boa tarde,</div>
+<div class="hero-title"><span id="welcome-name">Thiago</span><span style="color:var(--t3);font-weight:500">.</span></div>
+<div class="hero-sub">Aqui está o resumo da sua operação hoje.</div>
+<div class="hero-actions">
+<button class="hero-btn hero-btn-p" onclick="go('campanhas',document.querySelector('[onclick*=campanhas]'))"><i class="ti ti-rocket"></i>Nova Campanha</button>
+<button class="hero-btn hero-btn-g" onclick="go('inbox',document.querySelector('[onclick*=inbox]'))"><i class="ti ti-inbox"></i>Caixa de Entrada</button>
+<button class="hero-btn hero-btn-g" onclick="go('dashboard',document.querySelector('[onclick*=dashboard]'))"><i class="ti ti-chart-bar"></i>Dashboard</button>
+</div>
+</div>
+</div>
+
+<div class="home-stats">
+<div class="home-stat" onclick="go('inbox',document.querySelector('[onclick*=inbox]'))">
+<div class="home-stat-icon yw"><i class="ti ti-bell-ringing"></i></div>
+<div class="home-stat-body"><div class="home-stat-n" id="hm-attention">—</div><div class="home-stat-l">Aguardando você</div></div>
+</div>
+<div class="home-stat" onclick="go('inbox',document.querySelector('[onclick*=inbox]'))">
+<div class="home-stat-icon bl"><i class="ti ti-messages"></i></div>
+<div class="home-stat-body"><div class="home-stat-n" id="hm-conv">—</div><div class="home-stat-l">Conversas abertas</div></div>
+</div>
+<div class="home-stat" onclick="go('leads',document.querySelector('[onclick*=leads]'))">
+<div class="home-stat-icon pu"><i class="ti ti-users"></i></div>
+<div class="home-stat-body"><div class="home-stat-n" id="hm-leads">—</div><div class="home-stat-l">Leads cadastrados</div></div>
+</div>
+<div class="home-stat">
+<div class="home-stat-icon gr"><i class="ti ti-flame"></i></div>
+<div class="home-stat-body"><div class="home-stat-n" id="hm-today">—</div><div class="home-stat-l">Novas hoje</div></div>
+</div>
+</div>
+
+<div class="home-grid">
+<div class="home-block">
+<div class="home-block-h">
+<div><div class="home-block-t">Precisam de você</div><div class="home-block-s">Conversas onde a Clara passou pra você assumir</div></div>
+<button class="btn btn-g btn-sm" onclick="go('inbox',document.querySelector('[onclick*=inbox]'))">Ver todas <i class="ti ti-chevron-right" style="font-size:12px"></i></button>
+</div>
+<div id="hm-attention-list" class="home-attention-list"><div class="empty" style="padding:30px"><p>Carregando...</p></div></div>
+</div>
+
+<div class="home-col-side">
+<div class="home-quick-card" onclick="go('campanhas',document.querySelector('[onclick*=campanhas]'))">
+<div class="home-quick-icon br"><i class="ti ti-rocket"></i></div>
+<div class="home-quick-info"><div class="home-quick-t">Campanhas</div><div class="home-quick-s">Disparos em massa com IA</div></div>
+<i class="ti ti-chevron-right home-quick-arr"></i>
+</div>
+<div class="home-quick-card" onclick="go('agentes',document.querySelector('[onclick*=agentes]'))">
+<div class="home-quick-icon pu"><i class="ti ti-robot"></i></div>
+<div class="home-quick-info"><div class="home-quick-t">Agentes IA</div><div class="home-quick-s">Treine sua Clara</div></div>
+<i class="ti ti-chevron-right home-quick-arr"></i>
+</div>
+<div class="home-quick-card" onclick="go('pipeline',document.querySelector('[onclick*=pipeline]'))">
+<div class="home-quick-icon yw"><i class="ti ti-layout-kanban"></i></div>
+<div class="home-quick-info"><div class="home-quick-t">Pipeline</div><div class="home-quick-s">Kanban de leads</div></div>
+<i class="ti ti-chevron-right home-quick-arr"></i>
+</div>
+<div class="home-quick-card" onclick="go('dashboard',document.querySelector('[onclick*=dashboard]'))">
+<div class="home-quick-icon gr"><i class="ti ti-trending-up"></i></div>
+<div class="home-quick-info"><div class="home-quick-t">ROI em tempo real</div><div class="home-quick-s">Investimento vs vendas</div></div>
+<i class="ti ti-chevron-right home-quick-arr"></i>
+</div>
+</div>
+</div>
+</div>
 <div class="page" id="page-dashboard"><div class="dash-hd"><div><div class="dash-title">Dashboard Financeiro</div><div class="dash-sub" id="dash-period-label">Hoje</div></div><div class="dash-actions"><button class="btn btn-g" id="btn-sync-meta" onclick="sincronizarMetaAPI()">🔄 Sincronizar Meta</button><button class="btn btn-g" onclick="openModal('m-gasto')">+ Adicionar Gasto</button><button class="btn btn-p" onclick="openModal('m-venda')">+ Registrar Venda</button></div></div><div class="period-bar"><button class="period-btn active" onclick="setPeriod('hoje',this)">Hoje</button><button class="period-btn" onclick="setPeriod('semana',this)">Esta semana</button><button class="period-btn" onclick="setPeriod('mes',this)">Este mês</button><button class="period-btn" onclick="setPeriod('30dias',this)">Últimos 30 dias</button><div class="period-divider"></div><div class="period-custom"><input type="date" id="period-start" onchange="setPeriodCustom()"><span style="color:var(--t4);font-size:11px">até</span><input type="date" id="period-end" onchange="setPeriodCustom()"></div></div><div class="kpi-grid">
   <div class="kpi kpi-clickable" onclick="toggleInvestDetail()">
     <div class="kpi-icon"><i class="ti ti-trending-down"></i></div>
@@ -1053,7 +1182,7 @@ function getPeriodRange(){const now=new Date();let startStr,endStr,startDt,endDt
 function getPeriodLabel(){if(currentPeriod==='custom'&&customStart&&customEnd)return`De ${new Date(customStart).toLocaleDateString('pt-BR')} a ${new Date(customEnd).toLocaleDateString('pt-BR')}`;return{hoje:'Hoje',semana:'Esta semana',mes:'Este mês','30dias':'Últimos 30 dias'}[currentPeriod]||'Todos'}
 function setPeriod(p,el){currentPeriod=p;customStart=null;customEnd=null;document.querySelectorAll('.period-btn').forEach(b=>b.classList.remove('active'));if(el)el.classList.add('active');document.getElementById('period-start').value='';document.getElementById('period-end').value='';loadDashboard()}
 function setPeriodCustom(){const s=document.getElementById('period-start').value;const e=document.getElementById('period-end').value;if(s&&e){currentPeriod='custom';customStart=s;customEnd=e;document.querySelectorAll('.period-btn').forEach(b=>b.classList.remove('active'));loadDashboard()}}
-async function loadHome(){const[leads,convs]=await Promise.all([supa('leads?select=id,stage,created_at,phone,name&order=created_at.desc&limit=5000'),supa('conversas?select=id,status&limit=5000')]);allLeads=leads||[];if(leads){const el1=document.getElementById('hm-leads');if(el1)el1.textContent=leads.length}if(convs){const ab=convs.filter(c=>c.status==='aberta').length;const el2=document.getElementById('hm-conv');if(el2)el2.textContent=ab}}
+async function loadHome(){const[leads,convs]=await Promise.all([supa('leads?select=id,created_at,phone,name&order=created_at.desc&limit=5000'),supa('conversas?select=id,lead_id,status,ia_active,updated_at,created_at,leads(phone,name)&order=updated_at.desc&limit=5000')]);allLeads=leads||[];const totalLeads=leads?.length||0;const allConvsArr=convs||[];const convsAbertas=allConvsArr.filter(c=>c.status==='aberta').length;const aguardando=allConvsArr.filter(c=>c.status==='aberta'&&c.ia_active===false);const aguardandoCount=aguardando.length;const hoje=new Date();hoje.setHours(0,0,0,0);const convsHoje=allConvsArr.filter(c=>new Date(c.created_at)>=hoje).length;const fmt=n=>n.toLocaleString('pt-BR');const elL=document.getElementById('hm-leads');if(elL)elL.textContent=fmt(totalLeads);const elC=document.getElementById('hm-conv');if(elC)elC.textContent=fmt(convsAbertas);const elA=document.getElementById('hm-attention');if(elA)elA.textContent=fmt(aguardandoCount);const elT=document.getElementById('hm-today');if(elT)elT.textContent=fmt(convsHoje);const listEl=document.getElementById('hm-attention-list');if(!listEl)return;if(aguardandoCount===0){listEl.innerHTML='<div class="empty-state" style="padding:40px 20px;border:none"><h3 style="font-size:14px">✨ Tudo limpo!</h3><p style="font-size:12px;margin-top:6px">Nenhuma conversa precisa da sua atenção agora.</p></div>';return}const top=aguardando.slice(0,6);listEl.innerHTML=top.map(c=>{const nm=c.leads?.name||fmtPhone(c.leads?.phone||'')||'Sem nome';const initials=nameInitials(nm);const grad=typeof nameToGradient==='function'?nameToGradient(nm):'linear-gradient(135deg,var(--br),var(--pu))';const time=typeof timeAgo==='function'?timeAgo(c.updated_at):'';return`<div class="home-attention-item" onclick="abrirConversaDoLead('${c.lead_id||''}')"><div class="home-att-av" style="background:${grad}">${initials}</div><div class="home-att-info"><div class="home-att-name">${nm}</div><div class="home-att-meta"><i class="ti ti-player-pause" style="font-size:11px;vertical-align:-1px"></i> Você assumiu${time?' · há '+time:''}</div></div><i class="ti ti-chevron-right home-att-arr"></i></div>`}).join('')}
 async function loadDashboard(){document.getElementById('dash-period-label').textContent=getPeriodLabel();const[gastos,vendas,leads]=await Promise.all([supa('gastos?select=*&order=data.desc'),supa('vendas?select=*&order=data.desc'),supa('leads?select=id,stage,created_at,phone,name')]);allGastos=gastos||[];allVendas=vendas||[];allLeads=leads||allLeads;const{start,end,startStr,endStr}=getPeriodRange();const inRangeStr=ds=>{if(!ds)return false;const d=String(ds).slice(0,10);return d>=startStr&&d<=endStr};const inRangeDt=d=>{const dt=new Date(d);return dt>=start&&dt<end};const gastosP=allGastos.filter(g=>inRangeStr(g.data));const vendasP=allVendas.filter(v=>inRangeStr(v.data));const totalInvest=gastosP.reduce((s,g)=>s+Number(g.valor),0);const totalBruto=vendasP.reduce((s,v)=>s+Number(v.valor),0);const totalLiquido=vendasP.reduce((s,v)=>s+Number(v.valor_recebido!=null?v.valor_recebido:v.valor),0);const roi=totalInvest>0?((totalLiquido-totalInvest)/totalInvest):0;document.getElementById('k-invest').textContent=fmtBRL(totalInvest);document.getElementById('k-invest-sub').textContent=gastosP.length+' transações';document.getElementById('k-bruto').textContent=fmtBRL(totalBruto);document.getElementById('k-bruto-vendas').textContent=vendasP.length;document.getElementById('k-liquido').textContent=fmtBRL(totalLiquido);document.getElementById('k-liquido').style.color=totalLiquido>=0?'var(--gr)':'var(--rd)';document.getElementById('k-roi').textContent=totalInvest>0?roi.toFixed(2)+'x':'—';document.getElementById('k-roi').style.color=roi>=0?'var(--gr)':'var(--rd)';document.getElementById('k-roi-sub').textContent=totalInvest>0?(roi>=0?'lucro':'preju\u00edzo'):'sem investimento';const canais={};gastosP.forEach(g=>{const c=g.categoria||g.canal||'Outros';canais[c]=(canais[c]||0)+Number(g.valor)});const canalIcons={'Meta WhatsApp':'📱','Tokens IA':'🤖','Servidores':'🚂','Tráfego':'📈','Equipe':'👥','Outros':'➕',Gemini:'🤖',Meta:'📱',Railway:'🚂',Supabase:'💾',Vercel:'▲',Trafego:'📈'};const sortedCanais=Object.entries(canais).sort((a,b)=>b[1]-a[1]);document.getElementById('invest-list').innerHTML=sortedCanais.length?sortedCanais.map(([c,v])=>{const pct=totalInvest>0?((v/totalInvest)*100).toFixed(0):0;const cnt=gastosP.filter(g=>(g.categoria||g.canal)===c).length;return`<div class="invest-item"><div class="invest-ic" style="background:var(--s2)">${canalIcons[c]||'💸'}</div><div class="invest-info"><div class="invest-nm">${c}</div><div class="invest-ds">${cnt} transação(ões)</div></div><div class="invest-vl">${fmtBRL(v)}</div><div class="invest-pct">${pct}%</div></div>`}).join(''):'<div class="empty"><p>Nenhum gasto no período</p></div>';renderCharts(gastosP,vendasP,totalInvest,totalBruto);renderCompradores(vendasP)}var editingVendaId=null;function renderCompradores(vendas){const card=document.getElementById('compradores-card');if(!card)return;if(!vendas.length){card.style.display='none';return}card.style.display='block';const sorted=[...vendas].sort((a,b)=>new Date(b.data||b.created_at)-new Date(a.data||a.created_at));const totalLiq=sorted.reduce((s,v)=>s+Number(v.valor_recebido!=null?v.valor_recebido:v.valor),0);document.getElementById('comp-count').textContent=sorted.length;document.getElementById('comp-total').textContent=fmtBRL(totalLiq);const fmtTel=(p)=>{if(!p)return'';const s=String(p).replace(/\D/g,'');if(s.length===13)return`(${s.slice(2,4)}) ${s.slice(4,9)}-${s.slice(9)}`;if(s.length===12)return`(${s.slice(2,4)}) ${s.slice(4,8)}-${s.slice(8)}`;if(s.length===11)return`(${s.slice(0,2)}) ${s.slice(2,7)}-${s.slice(7)}`;return p};const payClass=(obs)=>{if(!obs)return'pay-pix';const o=obs.toLowerCase();if(o.includes('recorr'))return'pay-recorr';if(o.includes('cartão')||o.includes('cartao'))return'pay-cartao';if(o.includes('boleto'))return'pay-boleto';return'pay-pix'};const payLabel=(obs)=>{if(!obs)return'PIX';return obs.split('·')[0].trim()||'PIX'};document.getElementById('compradores-list').innerHTML=sorted.map(v=>{const nome=v.cliente_nome||'(sem nome)';const tel=v.cliente_telefone;const initials=nameInitials(nome);const grad=nameToGradient(nome);const dataFmt=new Date(v.data||v.created_at).toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'});const valorBruto=Number(v.valor||0);const valorLiq=Number(v.valor_recebido!=null?v.valor_recebido:v.valor||0);const pl=payLabel(v.observacoes);const pc=payClass(v.observacoes);const rowClick=v.lead_id?`onclick="abrirConversaDoLead('${v.lead_id}')"`:'';const cursor=v.lead_id?'cursor:pointer':'cursor:default';return `<div class="comprador-row" ${rowClick} style="${cursor}"><div class="comprador-av" style="background:${grad}">${initials}</div><div class="comprador-info"><div class="comprador-name"><span class="comprador-name-text">${nome}</span><span class="comprador-pay ${pc}">${pl}</span></div><div class="comprador-meta">${tel?fmtTel(tel):'sem telefone'} · ${dataFmt}</div></div><div class="comprador-valor"><div class="comprador-valor-bruto">${fmtBRL(valorBruto)}</div>${valorLiq!==valorBruto?`<div class="comprador-valor-liq">líq ${fmtBRL(valorLiq)}</div>`:''}</div><button class="comprador-edit-btn" title="Editar venda" onclick="event.stopPropagation();editarVenda('${v.id}')"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button></div>`}).join('')}function editarVenda(id){const v=allVendas.find(x=>x.id===id);if(!v){showToast('Venda não encontrada');return}editingVendaId=id;openModal('m-venda');setTimeout(()=>{document.getElementById('v-lead').value=v.lead_id||'';document.getElementById('v-nome').value=v.cliente_nome||'';document.getElementById('v-tel').value=v.cliente_telefone||'';document.getElementById('v-curso').value=v.curso||'';document.getElementById('v-valor-bruto').value=v.valor||'';document.getElementById('v-valor-liquido').value=v.valor_recebido!=null?v.valor_recebido:v.valor||'';const obs=v.observacoes||'';const fm=['PIX (com desconto)','Cartão (recorrência)','2 Cartões','Boleto Parcelado','PIX','Cartão'].find(f=>obs.startsWith(f));document.getElementById('v-forma').value=fm||'PIX';const obsLimpa=fm?obs.replace(fm,'').replace(/^\s*·\s*/,'').trim():obs;document.getElementById('v-obs').value=obsLimpa;document.getElementById('v-data').value=v.data?String(v.data).slice(0,10):new Date().toISOString().split('T')[0];const t=document.querySelector('#m-venda .mt');if(t)t.textContent='Editar Venda';const s=document.querySelector('#m-venda .ms');if(s)s.textContent='Atualize os dados da venda'},80)}async function abrirConversaDoLead(leadId){const convs=await supa(`conversas?select=id&lead_id=eq.${leadId}&order=updated_at.desc&limit=1`);if(convs&&convs[0]){go('inbox',document.querySelector('[onclick*=inbox]'));setTimeout(async()=>{await loadInbox();const el=document.querySelector(`.ci[onclick*="${convs[0].id}"]`);if(el)openConv(convs[0].id,el)},500)}else{showToast('Conversa não encontrada')}}
 
 function renderCharts(gastos,vendas,totalGastos,totalVendas){
