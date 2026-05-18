@@ -47,10 +47,10 @@
 }
 
 [data-theme="light"]{
-  --bg:#fafaf9;--w:#fff;--s2:#f5f5f5;--s3:#ebebed;
-  --b1:rgba(0,0,0,.08);--b2:rgba(0,0,0,.12);--b3:rgba(0,0,0,.18);
-  --t1:#0a0a0c;--t2:#52525b;--t3:#71717a;--t4:#a1a1aa;
-  --sb-bg:#fcfcfc;
+  --bg:#f4f3f9;--w:#fff;--s2:#f5f5f8;--s3:#ebebed;
+  --b1:rgba(15,15,30,.07);--b2:rgba(15,15,30,.12);--b3:rgba(15,15,30,.18);
+  --t1:#0a0a14;--t2:#52525b;--t3:#71717a;--t4:#a1a1aa;
+  --sb-bg:#fff;
   --br-soft:rgba(99,102,241,.04);
   --gr-soft:rgba(16,185,129,.04);
   --rd-soft:rgba(239,68,68,.04);
@@ -66,13 +66,19 @@
   --instl:#fff7ed;--instb:#fed7aa;
   --pkl:#fdf2f8;--pkb:#fbcfe8;
   --cyl:#ecfeff;--cyb:#a5f3fc;
-  --shadow-card:0 1px 2px rgba(0,0,0,.04);
-  --shadow-card-h:0 8px 24px rgba(0,0,0,.08);
-  --shadow-glow:0 2px 6px rgba(99,102,241,.25);
-  --shadow-modal:0 24px 48px rgba(0,0,0,.15);
-  --shadow-toast:0 12px 32px rgba(0,0,0,.12);
-  --shadow-av:0 1px 3px rgba(0,0,0,.08)
+  --shadow-card:0 1px 3px rgba(0,0,0,.04), 0 1px 2px rgba(0,0,0,.03);
+  --shadow-card-h:0 12px 28px rgba(15,15,30,.10), 0 4px 8px rgba(15,15,30,.05);
+  --shadow-glow:0 2px 8px rgba(99,102,241,.25);
+  --shadow-modal:0 24px 48px rgba(15,15,30,.18);
+  --shadow-toast:0 12px 32px rgba(15,15,30,.14);
+  --shadow-av:0 1px 3px rgba(0,0,0,.10);
+  --ring:0 0 0 3px rgba(99,102,241,.16)
 }
+
+/* Background ambient suave no light */
+[data-theme="light"] body{background:var(--bg);background-image:
+  radial-gradient(ellipse 800px 500px at 15% 0%, rgba(99,102,241,.08), transparent 55%),
+  radial-gradient(ellipse 600px 400px at 90% 100%, rgba(245,126,35,.05), transparent 60%)}
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:14px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
@@ -200,12 +206,16 @@ svg{stroke-width:1.75}
 .kpi:hover{border-color:var(--b2);transform:translateY(-1px);box-shadow:var(--shadow-card-h)}
 .kpi-clickable{cursor:pointer}
 .kpi-h{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;gap:8px}
-.kpi-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:0.5px solid currentColor}
-.kpi-icon svg{width:17px;height:17px;stroke-width:2}
-.kpi:nth-child(1) .kpi-icon{background:var(--rdl);color:var(--rd);border-color:var(--rdb)}
-.kpi:nth-child(2) .kpi-icon{background:var(--bll);color:var(--bl);border-color:var(--blb)}
-.kpi:nth-child(3) .kpi-icon{background:var(--grl);color:var(--gr);border-color:var(--grb)}
-.kpi:nth-child(4) .kpi-icon{background:var(--brl);color:var(--br);border-color:var(--brb)}
+.kpi-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.kpi-icon svg{width:18px;height:18px;stroke-width:2.2}
+.kpi:nth-child(1) .kpi-icon{background:rgba(239,68,68,.13);color:var(--rd)}
+.kpi:nth-child(2) .kpi-icon{background:rgba(59,130,246,.13);color:var(--bl)}
+.kpi:nth-child(3) .kpi-icon{background:rgba(16,185,129,.13);color:var(--gr)}
+.kpi:nth-child(4) .kpi-icon{background:rgba(99,102,241,.13);color:var(--br)}
+[data-theme="light"] .kpi:nth-child(1) .kpi-icon{background:#fee2e2;color:#dc2626}
+[data-theme="light"] .kpi:nth-child(2) .kpi-icon{background:#dbeafe;color:#2563eb}
+[data-theme="light"] .kpi:nth-child(3) .kpi-icon{background:#d1fae5;color:#059669}
+[data-theme="light"] .kpi:nth-child(4) .kpi-icon{background:#e0e7ff;color:#4f46e5}
 .kpi:nth-child(3) .kpi-n{color:var(--gr)}
 .kpi-arrow{color:var(--t4);transition:all .15s;display:flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:7px;flex-shrink:0}
 .kpi-clickable:hover .kpi-arrow{transform:translateX(3px);color:var(--br);background:var(--brl)}
@@ -246,11 +256,16 @@ svg{stroke-width:1.75}
 .chart-svg{width:100%;height:100%;overflow:visible}
 .chart-grid-line{stroke:var(--b1);stroke-width:.5;stroke-dasharray:2,3;opacity:.8}
 .chart-axis-label{font-size:9.5px;fill:var(--t4);font-weight:600;font-family:inherit;letter-spacing:-.005em}
+.chart-line{transition:stroke-width .15s}
+.chart-area{transition:opacity .15s}
 .chart-bar{cursor:pointer;transition:opacity .15s}
 .chart-bar:hover{opacity:.78}
 .chart-tooltip{position:absolute;background:var(--t1);color:var(--bg);padding:7px 11px;border-radius:7px;font-size:11.5px;font-weight:600;pointer-events:none;display:none;white-space:nowrap;z-index:10;transform:translate(-50%,-110%);box-shadow:0 4px 16px rgba(0,0,0,.4)}
 .chart-tooltip.show{display:block}
-.chart-dot{cursor:pointer;transition:r .15s}
+.chart-dot{cursor:pointer;transition:r .15s;fill:var(--w);r:3.5}
+.chart-dot:hover{r:6}
+.chart-card.gastos .chart-dot{stroke:var(--rd);stroke-width:2}
+.chart-card.vendas .chart-dot{stroke:var(--gr);stroke-width:2}
 .chart-empty{display:flex;align-items:center;justify-content:center;height:180px;color:var(--t3);font-size:12.5px;font-style:italic;font-weight:500}
 
 /* ============== COMPRADORES — layout limpo ============== */
@@ -1091,11 +1106,11 @@ function drawAreaChart(wrapId,tipId,dados,strokeColor,fillColor){
   // Gradient ID único
   const gradId='grad_'+wrapId;
   
-  const slotW=innerW/dados.length;const bw=slotW*0.62;const barsHtml=points.map((p,i)=>{const valForY=Math.max(p.valor,0);const h=Math.max((valForY/max)*innerH,2);const bx=PL+slotW*i+(slotW-bw)/2;const by=PT+innerH-h;return`<rect class="chart-bar" x="${bx}" y="${by}" width="${bw}" height="${h}" rx="3" fill="url(#${gradId})" data-idx="${i}"/>`}).join('');wrap.innerHTML=`<svg class="chart-svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><defs><linearGradient id="${gradId}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${strokeColor}" stop-opacity="1"/><stop offset="100%" stop-color="${strokeColor}" stop-opacity="0.3"/></linearGradient></defs>${grids.join('')}${xLabels}${barsHtml}</svg>`;
+  wrap.innerHTML=`<svg class="chart-svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><defs><linearGradient id="${gradId}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${strokeColor}" stop-opacity="0.32"/><stop offset="100%" stop-color="${strokeColor}" stop-opacity="0"/></linearGradient></defs>${grids.join('')}${xLabels}<path class="chart-area" d="${areaPath}" fill="url(#${gradId})"/><path class="chart-line" d="${linePath}" stroke="${strokeColor}" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>${dots}</svg>`;
   if(tooltip)wrap.appendChild(tooltip);
   
   // Hover nos dots
-  wrap.querySelectorAll('.chart-bar').forEach(dot=>{
+  wrap.querySelectorAll('.chart-dot').forEach(dot=>{
     dot.addEventListener('mouseenter',e=>{
       const i=parseInt(e.target.getAttribute('data-idx'));
       const p=points[i];
