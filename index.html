@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Instructiva Sales · v24</title>
-<meta name="build" content="v24-avatares-coloridos">
-<!-- VERSION-MARKER: v24-avatares-coloridos -->
+<title>Instructiva Sales · v25</title>
+<meta name="build" content="v25-microanimacoes">
+<!-- VERSION-MARKER: v25-microanimacoes -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.16.0/dist/tabler-icons.min.css">
 <style>
@@ -842,6 +842,83 @@ tr:hover td{background:var(--s2)}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--b2);border-radius:3px}
 ::-webkit-scrollbar-thumb:hover{background:var(--b3)}
+
+
+/* ========== MICROANIMAÇÕES v25 ========== */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideInLeft{from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:translateX(0)}}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:.7}}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes pop{0%{transform:scale(.92)}50%{transform:scale(1.02)}100%{transform:scale(1)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+
+/* Conversas: fade-in stagger ao carregar */
+.ci{animation:fadeInUp .28s cubic-bezier(.16,1,.3,1) both}
+.ci:nth-child(1){animation-delay:0ms}.ci:nth-child(2){animation-delay:18ms}.ci:nth-child(3){animation-delay:36ms}
+.ci:nth-child(4){animation-delay:54ms}.ci:nth-child(5){animation-delay:72ms}.ci:nth-child(6){animation-delay:90ms}
+.ci:nth-child(7){animation-delay:108ms}.ci:nth-child(8){animation-delay:126ms}.ci:nth-child(9){animation-delay:144ms}
+.ci:nth-child(10){animation-delay:162ms}.ci:nth-child(11){animation-delay:180ms}.ci:nth-child(12){animation-delay:198ms}
+.ci:nth-child(n+13){animation-delay:216ms}
+
+/* Hover lift nos itens da lista */
+.ci{transition:background .12s ease,transform .15s cubic-bezier(.16,1,.3,1)}
+.ci:hover{transform:translateX(2px)}
+.ci.active{transform:translateX(0)}
+
+/* Cards e quick links com hover lift */
+.home-attention-item,.home-quick-card,.kpi-row-card,.camp,.pipe-card,.invest-item,.comprador-row,.ag,.user-row{transition:transform .15s cubic-bezier(.16,1,.3,1),box-shadow .18s ease,border-color .15s ease}
+.home-attention-item:hover,.home-quick-card:hover,.kpi-row-card:hover{transform:translateY(-1px)}
+.camp:hover,.pipe-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lift,0 4px 16px rgba(0,0,0,.06))}
+
+/* Botões com bounce subtle no click */
+.btn,button.btn-p,button.btn-g,button.btn-r,.btn-pause,.btn-resume,.media-btn{transition:transform .12s cubic-bezier(.16,1,.3,1),background .15s ease,border-color .15s ease,box-shadow .15s ease}
+.btn:active,button.btn-p:active,button.btn-g:active,button.btn-r:active{transform:scale(.97)}
+.btn:not(:disabled):hover{transform:translateY(-1px)}
+
+/* Mensagens entrando com fade */
+.mg{animation:fadeInUp .25s cubic-bezier(.16,1,.3,1) both}
+
+/* Tabs e nav com transition suave */
+.nav-it,.itab,.subt{transition:color .18s ease,background .18s ease,border-color .18s ease}
+
+/* Page transitions */
+.page.active{animation:fadeIn .2s ease both}
+
+/* Skeleton loading universal */
+.skeleton{background:linear-gradient(90deg,var(--b1) 0%,var(--b2) 50%,var(--b1) 100%);background-size:200% 100%;animation:shimmer 1.4s ease-in-out infinite;border-radius:6px;display:inline-block}
+.skel-line{height:11px;width:100%;margin:5px 0}
+.skel-line.sm{width:60%;height:9px}
+.skel-line.lg{height:14px;width:80%}
+.skel-circle{width:42px;height:42px;border-radius:12px}
+
+/* Modals com animação */
+.mbg.open .mdl{animation:pop .25s cubic-bezier(.16,1,.3,1) both}
+
+/* Sidebar items com transition */
+.sb-item{transition:background .15s ease,color .15s ease,padding-left .15s ease}
+.sb-item:hover{padding-left:14px}
+
+/* Loading spinner global */
+.spinner-inline{display:inline-block;width:12px;height:12px;border:1.5px solid var(--t3);border-top-color:var(--br);border-radius:50%;animation:spin .8s linear infinite;vertical-align:-2px;margin-right:5px}
+
+/* Toast com slide */
+@keyframes toastIn{from{opacity:0;transform:translateY(20px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+.toast{animation:toastIn .25s cubic-bezier(.16,1,.3,1) both}
+
+/* Dropdown empresas suave */
+#empresa-dropdown{animation:fadeInUp .18s ease both}
+
+/* Chat input focus glow */
+#manual-msg{transition:border-color .2s ease,box-shadow .2s ease}
+#manual-msg:focus{outline:none;border-color:var(--br);box-shadow:0 0 0 3px var(--brl)}
+
+/* Unread badge pulsing suave */
+@keyframes badgePulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.ci.unread .ci-unread-count{animation:badgePulse 2s ease-in-out infinite}
+
+/* Active state com transição de cor mais suave */
+.ci.active{transition:background .18s ease,transform .15s cubic-bezier(.16,1,.3,1)}
 
 </style>
 </head>
