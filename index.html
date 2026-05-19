@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Instructiva Sales · v36</title>
+<title>Instructiva Sales · v37</title>
 <meta name="build" content="v33-sem-side-panel">
-<!-- VERSION-MARKER: v36-row2-condicional -->
+<!-- VERSION-MARKER: v37-no-anim-list -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.16.0/dist/tabler-icons.min.css">
 <style>
@@ -408,7 +408,7 @@ svg{stroke-width:1.75}
 .ci.recup::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--br)}
 .cav{width:42px;height:42px;border-radius:12px;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13.5px;flex-shrink:0;font-weight:600;letter-spacing:-.022em;box-shadow:var(--shadow-av)}
 .cinfo{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;max-height:80px;overflow:hidden}
-.cnm{font-size:13.5px;font-weight:500;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.01em;flex:1;min-width:0}
+.cnm{font-size:13.5px;font-weight:500;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.01em;flex:1;min-width:0;opacity:1}
 .ci.unread .cnm{font-weight:600}
 .cprev{font-size:11.5px;color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:500;letter-spacing:-.003em}
 .ci-row1{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
@@ -914,14 +914,8 @@ tr:hover td{background:var(--s2)}
 @keyframes pop{0%{transform:scale(.92)}50%{transform:scale(1.02)}100%{transform:scale(1)}}
 @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
 
-/* Conversas: fade-in stagger ao carregar */
-body.no-anim .ci,body.no-anim .mg,body.no-anim *{animation:none!important;transition:none!important}
-.ci{animation:fadeInUp .28s cubic-bezier(.16,1,.3,1) both}
-.ci:nth-child(1){animation-delay:0ms}.ci:nth-child(2){animation-delay:18ms}.ci:nth-child(3){animation-delay:36ms}
-.ci:nth-child(4){animation-delay:54ms}.ci:nth-child(5){animation-delay:72ms}.ci:nth-child(6){animation-delay:90ms}
-.ci:nth-child(7){animation-delay:108ms}.ci:nth-child(8){animation-delay:126ms}.ci:nth-child(9){animation-delay:144ms}
-.ci:nth-child(10){animation-delay:162ms}.ci:nth-child(11){animation-delay:180ms}.ci:nth-child(12){animation-delay:198ms}
-.ci:nth-child(n+13){animation-delay:216ms}
+/* Conversas: SEM animação fadeInUp (causava bug visual + travava perf) */
+body.no-anim .mg,body.no-anim *{animation:none!important;transition:none!important}
 
 /* Hover lift nos itens da lista */
 .ci{transition:background .12s ease,transform .15s cubic-bezier(.16,1,.3,1)}
