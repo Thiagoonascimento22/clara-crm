@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Instructiva Sales · v38</title>
+<title>Instructiva Sales · v39</title>
 <meta name="build" content="v33-sem-side-panel">
-<!-- VERSION-MARKER: v38-cor-blindada -->
+<!-- VERSION-MARKER: v39-peso-uniforme -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.16.0/dist/tabler-icons.min.css">
 <style>
@@ -1024,11 +1024,15 @@ body.no-anim .mg,body.no-anim *{animation:none!important;transition:none!importa
 .qr-chip.add i{font-size:13px}
 .chat-input-bar{padding:11px 16px 14px;border-top:none}
 
-/* HOTFIX v38: força cor consistente do nome em TODOS os items da lista */
-.ci .cnm{color:var(--t1)!important;opacity:1!important;font-weight:500!important;text-shadow:none!important;filter:none!important}
-.ci.unread .cnm{font-weight:700!important}
+/* HOTFIX v39: nome SEMPRE peso 600 (independente de unread)
+   Antes: 500 (read) vs 700 (unread) — diferença gritante, parecia "cinza"
+   Agora: tudo 600. Unread diferenciado apenas pelo badge azul + hora colorida */
+.ci .cnm{color:var(--t1)!important;opacity:1!important;font-weight:600!important;text-shadow:none!important;filter:none!important}
+.ci.unread .cnm{font-weight:600!important}
 .ci .ci-hora{color:var(--t3)!important;opacity:1!important}
-.ci.unread .ci-hora{color:var(--br)!important}
+.ci.unread .ci-hora{color:var(--br)!important;font-weight:600!important}
+.ci .ci-preview{color:var(--t2)!important}
+.ci.unread .ci-preview{color:var(--t1)!important;font-weight:500!important}
 .ci{opacity:1!important;filter:none!important;animation:none!important}
 .ci *{opacity:inherit}
 .ci .cnm,.ci .ci-hora,.ci .ci-preview{visibility:visible!important}
