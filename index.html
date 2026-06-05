@@ -1383,9 +1383,10 @@ async function doLogin(){
 function doLogout(){const auth=JSON.parse(localStorage.getItem('clara-auth')||'null');if(auth?.access_token){fetch(`${SUPA_URL}/auth/v1/logout`,{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':`Bearer ${auth.access_token}`}}).catch(()=>{})}localStorage.removeItem('clara-auth');localStorage.removeItem('clara-session');currentUser=null;document.getElementById('app').classList.remove('show');document.getElementById('login-screen').style.display='flex'}
 function launchApp(user){document.getElementById('login-screen').style.display='none';document.getElementById('app').classList.add('show');updateUserUI(user);applyPermissions();setGreeting();loadHome();inicializarSuperAdmin()}
 function applyPermissions(){
-  // Esconde aba Equipe pra quem não é admin
+  // Esconde aba Equipe pra quem não é admin OU não é super admin
+  // (gerenciar equipe é coisa do dono/super admin — Thalia é admin da Vendas mas não mexe em equipe)
   const equipeTab=document.getElementById('cfg-ni-equipe');
-  if(equipeTab)equipeTab.style.display=can('canManageUsers')?'flex':'none';
+  if(equipeTab)equipeTab.style.display=(can('canManageUsers')&&currentUser?.is_super_admin)?'flex':'none';
   // Aplica disabled em botões de ação que requerem permissão
   setTimeout(()=>{
     const map=[
@@ -1411,6 +1412,17 @@ function applyPermissions(){
         el.title='Sem permissão — fale com o admin';
       });
     });
+    // MENU ENXUTO — quem NÃO é super admin (ex: Thalia, gerente da Vendas)
+    // vê só o essencial. Esconde itens que são da operação ampla.
+    if(!currentUser?.is_super_admin){
+      // esconde itens do menu lateral por destino
+      ['pipeline','canais'].forEach(dest=>{
+        document.querySelectorAll(`.ni[onclick*="'${dest}'"]`).forEach(el=>{el.style.display='none'});
+      });
+      // esconde o seletor de empresa do topo (ela fica presa na empresa dela)
+      const pill=document.getElementById('main-pill');
+      if(pill){pill.style.pointerEvents='none';const arrow=document.getElementById('main-pill-arrow');if(arrow)arrow.style.display='none'}
+    }
   },300);
 }
 function updateUserUI(user){const initials=nameInitials(user.name);const gradient=nameToGradient(user.name);document.getElementById('sidebar-name').textContent=user.name.split(' ')[0];document.getElementById('sidebar-role').textContent=user.cargo||ROLE_LABELS[user.role]||'Usuário';document.getElementById('sidebar-initials').textContent=initials;document.getElementById('cfg-av-init').textContent=initials;document.getElementById('welcome-name').textContent=user.name.split(' ')[0]+'.';document.getElementById('cfg-name').value=user.name;document.getElementById('cfg-email').value=user.email;document.getElementById('cfg-role-inp').value=user.cargo||'';const sbAv=document.getElementById('sidebar-av');const cfgAv=document.getElementById('cfg-avatar');if(user.avatar){sbAv.innerHTML=`<img src="${user.avatar}">`;cfgAv.innerHTML=`<img src="${user.avatar}">`}else{sbAv.style.background=gradient;cfgAv.style.background=gradient}}
